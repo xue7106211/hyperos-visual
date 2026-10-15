@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #1b1e23;
+  --muted: #8b939c;
+  --line: #e7e9ee;
+  --track: #eceff3;
+  --red: #ef3124;
+  --green: #178a45;
+  --green-soft: #e7f6ee;
+  --green-bar: #2fbe6a;
+  --amber: #9a6230;
+  --amber-soft: #f8f1e4;
+  --amber-bar: #f0b429;
+  --sidebar: 248px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+::selection {
+  background: #fde8e6;
+}

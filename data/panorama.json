@@ -1,0 +1,568 @@
+{
+  "title": "HyperOS 设计与开发平台全景图",
+  "categories": [
+    {
+      "id": "principles",
+      "index": 1,
+      "name": "设计原则",
+      "summary": "判断的方向与依据",
+      "groups": [
+        {
+          "name": "设计体系原则",
+          "summary": "判断的方向与依据",
+          "items": [
+            {
+              "name": "层级",
+              "points": [
+                "空间层次",
+                "信息顺序",
+                "焦点导引",
+                "空间分隔"
+              ],
+              "paired": {
+                "name": "空间结构 / 布局体系",
+                "points": [
+                  "应用框架",
+                  "层次组织",
+                  "导航路径"
+                ]
+              }
+            },
+            {
+              "name": "清晰",
+              "points": [
+                "视觉对比",
+                "信息区分",
+                "焦点清晰",
+                "反馈明确",
+                "语义清晰"
+              ],
+              "paired": {
+                "name": "交互与反馈",
+                "points": [
+                  "操作控件",
+                  "菜单行为",
+                  "触觉与动效反馈"
+                ]
+              }
+            },
+            {
+              "name": "一致",
+              "points": [
+                "视觉一致",
+                "交互一致",
+                "语义一致",
+                "软硬件协调"
+              ],
+              "paired": {
+                "name": "系统与生态",
+                "points": [
+                  "系统组件",
+                  "信息结构",
+                  "软硬件形态协调"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "组件与控件设计原则"
+        }
+      ]
+    },
+    {
+      "id": "experience",
+      "index": 2,
+      "name": "通用体验设计",
+      "summary": "界面共同遵守的原则",
+      "groups": [
+        {
+          "name": "视觉风格",
+          "summary": "视觉呈现的统一语言",
+          "items": [
+            {
+              "name": "色彩",
+              "status": "已有"
+            },
+            {
+              "name": "圆角",
+              "status": "已有"
+            },
+            {
+              "name": "字体排版",
+              "status": "已有"
+            },
+            {
+              "name": "材质",
+              "status": "已有"
+            },
+            {
+              "name": "图标",
+              "status": "已有"
+            }
+          ]
+        },
+        {
+          "name": "Design Token",
+          "status": "已有"
+        },
+        {
+          "name": "布局框架",
+          "summary": "界面骨架的构建规则",
+          "status": "进行中"
+        },
+        {
+          "name": "页面导航与流转",
+          "summary": "界面之间的连接与流转关系",
+          "status": "进行中"
+        },
+        {
+          "name": "层级关系",
+          "summary": "信息与空间的秩序与优先级",
+          "status": "进行中"
+        },
+        {
+          "name": "视觉流畅动效模型",
+          "summary": "界面元素运动的节奏与规则",
+          "status": "进行中"
+        },
+        {
+          "name": "文案指南",
+          "summary": "文字表达的规则",
+          "status": "进行中"
+        },
+        {
+          "name": "无障碍设计",
+          "summary": "面向所有人的可访问性基础",
+          "status": "进行中"
+        },
+        {
+          "name": "隐私设计",
+          "summary": "应用对用户隐私的处理方式",
+          "status": "进行中"
+        }
+      ]
+    },
+    {
+      "id": "components",
+      "index": 3,
+      "name": "组件与控件",
+      "summary": "构建界面的可复用 UI 单元",
+      "groups": [
+        {
+          "name": "导航与搜索",
+          "summary": "查找与导航的组件",
+          "status": "已有",
+          "items": [
+            {
+              "name": "标题栏",
+              "en": "Action Bar",
+              "status": "已有"
+            },
+            {
+              "name": "㝵航",
+              "en": "Navigation",
+              "status": "已有"
+            },
+            {
+              "name": "分段控制按钮",
+              "en": "Segmented Control Buttons",
+              "status": "已有"
+            },
+            {
+              "name": "标签栏",
+              "en": "Tabs",
+              "status": "已有"
+            },
+            {
+              "name": "搜索栏",
+              "en": "Search Bar",
+              "status": "已有"
+            },
+            {
+              "name": "侧边导航栏",
+              "en": "Sidebar Navigation",
+              "status": "已有"
+            },
+            {
+              "name": "底部工具",
+              "en": "Bottom Toolbar",
+              "status": "已有"
+            },
+            {
+              "name": "页面指示器",
+              "en": "Page Indicator",
+              "status": "已有"
+            },
+            {
+              "name": "索引",
+              "en": "Index Bar",
+              "status": "进行中"
+            },
+            {
+              "name": "滚动条",
+              "en": "Scrollbar",
+              "status": "已有"
+            }
+          ]
+        },
+        {
+          "name": "展示类",
+          "summary": "反馈与提示的组件",
+          "items": [
+            {
+              "name": "列表",
+              "en": "List",
+              "status": "已有"
+            },
+            {
+              "name": "卡片",
+              "en": "Card",
+              "status": "已有"
+            },
+            {
+              "name": "徽标",
+              "en": "Badge",
+              "status": "已有"
+            },
+            {
+              "name": "空状态",
+              "en": "Empty Stat",
+              "status": "进行中"
+            },
+            {
+              "name": "气泡提示",
+              "status": "进行中"
+            },
+            {
+              "name": "Tag标签",
+              "status": "已有"
+            },
+            {
+              "name": "轮播",
+              "status": "进行中"
+            },
+            {
+              "name": "分割器",
+              "status": "进行中"
+            },
+            {
+              "name": "进度指示器",
+              "status": "进行中"
+            },
+            {
+              "name": "Toast",
+              "status": "进行中"
+            }
+          ]
+        },
+        {
+          "name": "选择与输入",
+          "summary": "输入信息与做出选择的组件",
+          "status": "已有",
+          "items": [
+            {
+              "name": "开关",
+              "en": "Switch"
+            },
+            {
+              "name": "单选",
+              "en": "Radio"
+            },
+            {
+              "name": "多选",
+              "en": "Checkbox"
+            },
+            {
+              "name": "输入框",
+              "en": "Text Field"
+            },
+            {
+              "name": "日期/时间选择器",
+              "en": "Date/Time Picker"
+            },
+            {
+              "name": "滑动选择器",
+              "en": "Slider"
+            }
+          ]
+        },
+        {
+          "name": "容器类",
+          "summary": "承载元素的组件",
+          "status": "已有",
+          "items": [
+            {
+              "name": "弹窗",
+              "en": "Dialog"
+            },
+            {
+              "name": "抽屉浮窗",
+              "en": "Bottom Sheet"
+            },
+            {
+              "name": "提示条",
+              "en": "Snackbar"
+            }
+          ]
+        },
+        {
+          "name": "菜单与操作",
+          "summary": "命令与行为的组件",
+          "items": [
+            {
+              "name": "按钮",
+              "en": "Button",
+              "status": "已有"
+            },
+            {
+              "name": "行动操作按钮",
+              "en": "Floating Action Button",
+              "status": "已有"
+            },
+            {
+              "name": "菜单",
+              "en": "Menu",
+              "status": "已有"
+            },
+            {
+              "name": "超链接",
+              "status": "进行中"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "patterns",
+      "index": 4,
+      "name": "设计模式",
+      "summary": "常见问题的标准解法",
+      "groups": [
+        {
+          "name": "页面模式",
+          "summary": "界面切换为特定目的的模式",
+          "status": "进行中",
+          "items": [
+            {
+              "name": "新建模式"
+            },
+            {
+              "name": "编辑模式/多选模式"
+            },
+            {
+              "name": "搜索模式"
+            }
+          ]
+        },
+        {
+          "name": "加载与刷新",
+          "summary": "内容加载状态的表现方式",
+          "status": "进行中"
+        },
+        {
+          "name": "下载",
+          "summary": "应用内下载",
+          "status": "进行中"
+        },
+        {
+          "name": "状态提示",
+          "summary": "应用向用户传达的状态",
+          "status": "进行中"
+        },
+        {
+          "name": "启动",
+          "summary": "启动页",
+          "status": "进行中"
+        },
+        {
+          "name": "引导",
+          "summary": "帮助用户进入与理解的模式，新功能介绍页、新功能介绍弹窗",
+          "status": "进行中"
+        },
+        {
+          "name": "资源选择",
+          "summary": "从系统资源中选取的模式",
+          "status": "已有"
+        },
+        {
+          "name": "系统分享",
+          "summary": "系统分享抽屉或弹窗",
+          "status": "进行中"
+        },
+        {
+          "name": "自升级",
+          "summary": "自升级弹窗",
+          "status": "进行中"
+        },
+        {
+          "name": "系统能力衔接",
+          "summary": "应用与系统服务的对接方式",
+          "status": "进行中"
+        },
+        {
+          "name": "数据图表化",
+          "summary": "数据以图形形式的呈现方式。",
+          "status": "进行中"
+        }
+      ]
+    },
+    {
+      "id": "input",
+      "index": 5,
+      "name": "交互与输入",
+      "summary": "用户操作系统的方式",
+      "groups": [
+        {
+          "name": "触控与手势",
+          "summary": "屏幕上的触摸与手势操作",
+          "status": "进行中"
+        },
+        {
+          "name": "拖放操作",
+          "summary": "元素拖动与放置的组合操作",
+          "status": "进行中"
+        },
+        {
+          "name": "指针与光标",
+          "summary": "鼠标与触控板的指针操作",
+          "status": "进行中"
+        },
+        {
+          "name": "键盘与焦点",
+          "summary": "键盘输入与焦点导航",
+          "status": "进行中"
+        },
+        {
+          "name": "手写笔",
+          "summary": "手写笔的书写与绘制操作",
+          "status": "进行中"
+        },
+        {
+          "name": "语音输入",
+          "summary": "通过语音进行的输入与控制",
+          "status": "进行中"
+        },
+        {
+          "name": "隔空手势",
+          "summary": "不接触屏幕的空中手势操作",
+          "status": "进行中"
+        },
+        {
+          "name": "硬件按钮",
+          "summary": "物理按键的操作方式",
+          "status": "进行中"
+        },
+        {
+          "name": "交互归一",
+          "summary": "多模态输入的统一操作映射",
+          "status": "进行中"
+        }
+      ]
+    },
+    {
+      "id": "platform",
+      "index": 6,
+      "name": "系统特性与平台能力",
+      "summary": "OS 提供的能力与状态",
+      "groups": [
+        {
+          "name": "系统体验",
+          "summary": "用户与 OS 直接接触的 UI 界面",
+          "status": "进行中",
+          "items": [
+            {
+              "name": "状态栏"
+            },
+            {
+              "name": "系统虚拟导航键"
+            },
+            {
+              "name": "控制杆"
+            },
+            {
+              "name": "超级岛"
+            },
+            {
+              "name": "通知"
+            },
+            {
+              "name": "小部件"
+            },
+            {
+              "name": "虚拟键盘"
+            }
+          ]
+        },
+        {
+          "name": "窗口与任务",
+          "summary": "OS 对屏幕与任务的管理",
+          "status": "进行中",
+          "items": [
+            {
+              "name": "多任务"
+            },
+            {
+              "name": "多窗口"
+            },
+            {
+              "name": "画中画"
+            },
+            {
+              "name": "分屏"
+            }
+          ]
+        },
+        {
+          "name": "系统服务",
+          "summary": "应用调用的系统级能力",
+          "status": "进行中"
+        },
+        {
+          "name": "设备能力 / 当前阶段无关联",
+          "summary": "硬件资源的访问接口",
+          "status": "进行中"
+        },
+        {
+          "name": "系统安全能力",
+          "summary": "应用调用的身份与安全能力",
+          "status": "进行中"
+        }
+      ]
+    },
+    {
+      "id": "devices",
+      "index": 7,
+      "name": "多设备设计与场景实践",
+      "summary": "面向多设备与场景的适配与实践",
+      "groups": [
+        {
+          "name": "设备特性发挥",
+          "summary": "各类设备的形态特性与利用方式",
+          "status": "进行中",
+          "items": [
+            {
+              "name": "手机"
+            },
+            {
+              "name": "折叠屏"
+            },
+            {
+              "name": "平板"
+            }
+          ]
+        },
+        {
+          "name": "设备互通 / 跨设备协同",
+          "summary": "设备之间的连接与协同方式",
+          "status": "进行中"
+        },
+        {
+          "name": "应用最佳实践",
+          "summary": "应用层面的适配与场景实践",
+          "status": "进行中"
+        }
+      ]
+    }
+  ]
+}
