@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HyperOS 设计与开发平台全景图</title>
+<!-- 更新全景数据时，只改下面这段 JSON。字段没有原文就不写。 -->
+<script id="data" type="application/json">
+{
+  "title": "HyperOS 设计与开发平台全景图",
+  "categories": [
+    {
+      "id": "principles",
+      "index": 1,
+      "name": "设计原则",
+      "summary": "判断的方向与依据",
+      "groups": [
+        {
+          "name": "设计体系原则",
+          "summary": "判断的方向与依据",
+          "items": [
+            {
+              "name": "层级",
+              "points": ["空间层次", "信息顺序", "焦点导引", "空间分隔"],
+              "paired": {
+                "name": "空间结构 / 布局体系",
+                "points": ["应用框架", "层次组织", "导航路径"]
+              }
+            },
+            {
+              "name": "清晰",
+              "points": ["视觉对比", "信息区分", "焦点清晰", "反馈明确", "语义清晰"],
+              "paired": {
+                "name": "交互与反馈",
+                "points": ["操作控件", "菜单行为", "触觉与动效反馈"]
+              }
+            },
+            {
+              "name": "一致",
+              "points": ["视觉一致", "交互一致", "语义一致", "软硬件协调"],
+              "paired": {
+                "name": "系统与生态",
+                "points": ["系统组件", "信息结构", "软硬件形态协调"]
+              }
+            }
+          ]
+        },
+        {
+          "name": "组件与控件设计原则"
+        }
+      ]
+    },
+    {
+      "id": "experience",
+      "index": 2,
+      "name": "通用体验设计",
+      "summary": "界面共同遵守的原则",
+      "groups": [
+        {
+          "name": "视觉风格",
+          "summary": "视觉呈现的统一语言",
+          "items": [
+            { "name": "色彩", "status": "已有" },
+            { "name": "圆角", "status": "已有" },
+            { "name": "字体排版", "status": "已有" },
+            { "name": "材质", "status": "已有" },
+            { "name": "图标", "status": "已有" }
+          ]
+        },
+        { "name": "Design Token", "status": "已有" },
+        { "name": "布局框架", "summary": "界面骨架的构建规则", "status": "进行中" },
+        { "name": "页面导航与流转", "summary": "界面之间的连接与流转关系", "status": "进行中" },
+        { "name": "层级关系", "summary": "信息与空间的秩序与优先级", "status": "进行中" },
+        { "name": "视觉流畅动效模型", "summary": "界面元素运动的节奏与规则", "status": "进行中" },
+        { "name": "文案指南", "summary": "文字表达的规则", "status": "进行中" },
+        { "name": "无障碍设计", "summary": "面向所有人的可访问性基础", "status": "进行中" },
+        { "name": "隐私设计", "summary": "应用对用户隐私的处理方式", "status": "进行中" }
+      ]
+    },
+    {
+      "id": "components",
+      "index": 3,
+      "name": "组件与控件",
+      "summary": "构建界面的可复用 UI 单元",
+      "groups": [
+        {
+          "name": "导航与搜索",
+          "summary": "查找与导航的组件",
+          "status": "已有",
+          "items": [
+            { "name": "标题栏", "en": "Action Bar", "status": "已有" },
+            { "name": "㝵航", "en": "Navigation", "status": "已有", "note": "原文照录" },
+            { "name": "分段控制按钮", "en": "Segmented Control Buttons", "status": "已有" },
+            { "name": "标签栏", "en": "Tabs", "status": "已有" },
+            { "name": "搜索栏", "en": "Search Bar", "status": "已有" },
+            { "name": "侧边导航栏", "en": "Sidebar Navigation", "status": "已有" },
+            { "name": "底部工具", "en": "Bottom Toolbar", "status": "已有" },
+            { "name": "页面指示器", "en": "Page Indicator", "status": "已有" },
+            { "name": "索引", "en": "Index Bar", "status": "进行中" },
+            { "name": "滚动条", "en": "Scrollbar", "status": "已有" }
+          ]
+        },
+        {
+          "name": "菜单与操作",
+          "summary": "命令与行为的组件",
+          "items": [
+            { "name": "按钮", "en": "Button", "status": "已有" },
+            { "name": "行动操作按钮", "en": "Floating Action Button", "status": "已有" },
+            { "name": "菜单", "en": "Menu", "status": "已有" },
+            { "name": "超链接", "status": "进行中" }
+          ]
+        },
+        {
+          "name": "选择与输入",
+          "summary": "输入信息与做出选择的组件",
+          "status": "已有",
+          "items": [
+            { "name": "开关", "en": "Switch" },
+            { "name": "单选", "en": "Radio" },
+            { "name": "多选", "en": "Checkbox" },
+            { "name": "输入框", "en": "Text Field" },
+            { "name": "日期/时间选择器", "en": "Date/Time Picker" },
+            { "name": "滑动选择器", "en": "Slider" }
+          ]
+        },
+        {
+          "name": "容器类",
+          "summary": "承载元素的组件",
+          "status": "已有",
+          "items": [
+            { "name": "弹窗", "en": "Dialog" },
+            { "name": "抽屉浮窗", "en": "Bottom Sheet" },
+            { "name": "提示条", "en": "Snackbar" }
+          ]
+        },
+        {
+          "name": "展示类",
+          "summary": "反馈与提示的组件",
+          "items": [
+            { "name": "列表", "en": "List", "status": "已有" },
+            { "name": "卡片", "en": "Card", "status": "已有" },
+            { "name": "徽标", "en": "Badge", "status": "已有" },
+            { "name": "空状态", "en": "Empty Stat", "status": "进行中", "note": "原文照录" },
+            { "name": "气泡提示", "status": "进行中" },
+            { "name": "Tag标签", "status": "已有" },
+            { "name": "轮播", "status": "进行中" },
+            { "name": "分割器", "status": "进行中" },
+            { "name": "进度指示器", "status": "进行中" },
+            { "name": "Toast", "status": "进行中" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "patterns",
+      "index": 4,
+      "name": "设计模式",
+      "summary": "常见问题的标准解法",
+      "groups": [
+        {
+          "name": "页面模式",
+          "summary": "界面切换为特定目的的模式",
+          "status": "进行中",
+          "items": [
+            { "name": "新建模式" },
+            { "name": "编辑模式/多选模式" },
+            { "name": "搜索模式" }
+          ]
+        },
+        { "name": "加载与刷新", "summary": "内容加载状态的表现方式", "status": "进行中" },
+        { "name": "下载", "summary": "应用内下载", "status": "进行中" },
+        { "name": "状态提示", "summary": "应用向用户传达的状态", "status": "进行中" },
+        { "name": "启动", "summary": "启动页", "status": "进行中" },
+        { "name": "引导", "summary": "帮助用户进入与理解的模式，新功能介绍页、新功能介绍弹窗", "status": "进行中" },
+        { "name": "资源选择", "summary": "从系统资源中选取的模式", "status": "已有" },
+        { "name": "系统分享", "summary": "系统分享抽屉或弹窗", "status": "进行中" },
+        { "name": "自升级", "summary": "自升级弹窗", "status": "进行中" },
+        { "name": "系统能力衔接", "summary": "应用与系统服务的对接方式", "status": "进行中" },
+        { "name": "数据图表化", "summary": "数据以图形形式的呈现方式。", "status": "进行中" }
+      ]
+    },
+    {
+      "id": "input",
+      "index": 5,
+      "name": "交互与输入",
+      "summary": "用户操作系统的方式",
+      "groups": [
+        { "name": "触控与手势", "summary": "屏幕上的触摸与手势操作", "status": "进行中" },
+        { "name": "拖放操作", "summary": "元素拖动与放置的组合操作", "status": "进行中" },
+        { "name": "指针与光标", "summary": "鼠标与触控板的指针操作", "status": "进行中" },
+        { "name": "键盘与焦点", "summary": "键盘输入与焦点导航", "status": "进行中" },
+        { "name": "手写笔", "summary": "手写笔的书写与绘制操作", "status": "进行中" },
+        { "name": "语音输入", "summary": "通过语音进行的输入与控制", "status": "进行中" },
+        { "name": "隔空手势", "summary": "不接触屏幕的空中手势操作", "status": "进行中" },
+        { "name": "硬件按钮", "summary": "物理按键的操作方式", "status": "进行中" },
+        { "name": "交互归一", "summary": "多模态输入的统一操作映射", "status": "进行中" }
+      ]
+    },
+    {
+      "id": "platform",
+      "index": 6,
+      "name": "系统特性与平台能力",
+      "summary": "OS 提供的能力与状态",
+      "groups": [
+        {
+          "name": "系统体验",
+          "summary": "用户与 OS 直接接触的 UI 界面",
+          "status": "进行中",
+          "items": [
+            { "name": "状态栏" },
+            { "name": "系统虚拟导航键" },
+            { "name": "控制杆" },
+            { "name": "超级岛" },
+            { "name": "通知" },
+            { "name": "小部件" },
+            { "name": "虚拟键盘" }
+          ]
+        },
+        {
+          "name": "窗口与任务",
+          "summary": "OS 对屏幕与任务的管理",
+          "status": "进行中",
+          "items": [
+            { "name": "多任务" },
+            { "name": "多窗口" },
+            { "name": "画中画" },
+            { "name": "分屏" }
+          ]
+        },
+        { "name": "系统服务", "summary": "应用调用的系统级能力", "status": "进行中" },
+        { "name": "设备能力 / 当前阶段无关联", "summary": "硬件资源的访问接口", "status": "进行中" },
+        { "name": "系统安全能力", "summary": "应用调用的身份与安全能力", "status": "进行中" }
+      ]
+    },
+    {
+      "id": "devices",
+      "index": 7,
+      "name": "多设备设计与场景实践",
+      "summary": "面向多设备与场景的适配与实践",
+      "groups": [
+        {
+          "name": "设备特性发挥",
+          "summary": "各类设备的形态特性与利用方式",
+          "status": "进行中",
+          "items": [
+            { "name": "手机" },
+            { "name": "折叠屏" },
+            { "name": "平板" }
+          ]
+        },
+        { "name": "设备互通 / 跨设备协同", "summary": "设备之间的连接与协同方式", "status": "进行中" },
+        { "name": "应用最佳实践", "summary": "应用层面的适配与场景实践", "status": "进行中" }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg: #f3f4f6;
+    --surface: #ffffff;
+    --text: #1b1d21;
+    --muted: #8a9099;
+    --faint: #a3a8b0;
+    --line: #e7e9ee;
+    --line-strong: #d8dbe2;
+    --have: #157a3e;
+    --have-bg: #e7f6ee;
+    --wip: #9a6230;
+    --wip-bg: #f8f1e4;
+    --none: #6b7280;
+    --none-bg: #f1f2f4;
+    --accent: #3b82f6;
+    --tools-h: 56px;
+    --nav: 232px;
+    color-scheme: light;
+  }
+
+  .t1 { --mark: #5d6e84; }
+  .t2 { --mark: #5e7864; }
+  .t3 { --mark: #7d6844; }
+  .t4 { --mark: #6a5c72; }
+  .t5 { --mark: #4d6a6e; }
+  .t6 { --mark: #7a584f; }
+  .t7 { --mark: #525e6a; }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Geist, "Segoe UI", ui-sans-serif, system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button, input { font: inherit; color: inherit; }
+  button { cursor: pointer; }
+  :focus { outline: none; }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .skip {
+    position: absolute;
+    left: 16px;
+    top: -48px;
+    background: var(--surface);
+    color: var(--text);
+    padding: 8px 12px;
+    z-index: 50;
+  }
+  .skip:focus { top: 8px; }
+
+  .wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .opening { padding-top: 28px; padding-bottom: 8px; }
+
+  .opening-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+  }
+
+  h1 {
+    margin: 0;
+    max-width: 16em;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  .source {
+    margin: 2px 0 0;
+    max-width: 36em;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .stats {
+    display: flex;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .stats div {
+    min-width: 88px;
+    padding: 10px 14px 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+  .stats b {
+    display: block;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+  }
+  .stats span {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .dist { padding-top: 4px; padding-bottom: 4px; }
+  .panorama-block { margin-top: 0; }
+  .panorama-label {
+    margin: 0 0 12px;
+    font-size: 12px;
+    color: var(--faint);
+  }
+  .panorama {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-width: 760px;
+  }
+  .seg {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 180px) 32px minmax(80px, 1fr);
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+    min-height: 32px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    text-align: left;
+  }
+  .seg-track {
+    display: block;
+    height: 6px;
+    background: #e8edf5;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .seg-fill {
+    display: block;
+    width: calc(var(--w) * 100%);
+    height: 6px;
+    background: var(--accent);
+    border-radius: 99px;
+  }
+  .seg-index,
+  .seg-count {
+    font-size: 12px;
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .seg-count { text-align: right; }
+  .seg-name { font-size: 13px; line-height: 1.4; }
+  .seg[aria-current="location"] .seg-name { font-weight: 500; }
+  .caption {
+    margin: 8px 0 0;
+    font-size: 12px;
+    color: var(--faint);
+  }
+
+  .tools {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(243, 244, 246, 0.92);
+    border-bottom: 1px solid transparent;
+    backdrop-filter: blur(10px);
+  }
+  .tools-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 44px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+  }
+  .filter, .shown {
+    height: 30px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: #3c4048;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .filter[aria-pressed="true"] {
+    background: var(--text);
+    border-color: var(--text);
+    color: #fff;
+  }
+  .filter[data-status-filter="已完成"][aria-pressed="true"] { background: var(--have-bg); color: var(--have); border-color: transparent; }
+  .filter[data-status-filter="进行中"][aria-pressed="true"] { background: var(--wip-bg); color: var(--wip); border-color: transparent; }
+  .shown {
+    display: inline-flex;
+    align-items: center;
+    border: 0;
+    background: transparent;
+    padding-left: 8px;
+    color: var(--muted);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+  .workspace {
+    display: block;
+    padding-top: 16px;
+    padding-bottom: 28px;
+  }
+
+  #main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: stretch;
+  }
+  #components { grid-column: 1 / -1; grid-row: 1; }
+  #principles { grid-column: 1; grid-row: 2; }
+  #experience { grid-column: 2; grid-row: 2; }
+  #input { grid-column: 1; grid-row: 3; }
+  #devices { grid-column: 2; grid-row: 3; }
+  #patterns { grid-column: 1; grid-row: 4; }
+  #platform { grid-column: 2; grid-row: 4; }
+
+  .nav {
+    position: sticky;
+    top: calc(var(--tools-h) + 16px);
+    align-self: start;
+  }
+  .nav-label {
+    margin: 0 0 8px;
+    font-size: 12px;
+    color: var(--faint);
+  }
+  .nav-link {
+    display: grid;
+    grid-template-columns: 3px 24px minmax(0, 1fr) auto;
+    column-gap: 8px;
+    align-items: center;
+    padding: 7px 0;
+    text-decoration: none;
+    color: var(--muted);
+  }
+  .mark {
+    width: 3px;
+    height: 14px;
+    background: var(--mark);
+    border-radius: 1px;
+  }
+  .nav-link .idx,
+  .nav-link .ct {
+    font-size: 12px;
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .nav-link .nm { font-size: 13px; line-height: 1.4; }
+  .nav-link[aria-current="page"] { color: var(--text); }
+  .nav-link[aria-current="page"] .nm { font-weight: 500; }
+
+  .category {
+    min-width: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 18px 18px 8px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    scroll-margin-top: calc(var(--tools-h) + 12px);
+  }
+  .cat-body { flex: 1; min-width: 0; }
+
+  .cat-index {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-size: 12px;
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .cat-line {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 2px;
+  }
+  .cat-line .mark { display: none; }
+  .cat-head h2 {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+  }
+  .cat-summary {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    min-width: 0;
+    min-height: 76px;
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+  .stat b {
+    display: block;
+    margin: 0;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+  }
+  .stat span {
+    display: inline-flex;
+    align-items: center;
+    height: 22px;
+    padding: 0 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+  }
+  .stat[data-status="已完成"] b { color: var(--have); }
+  .stat[data-status="进行中"] b { color: var(--wip); }
+  .stat[data-status="已完成"] span { background: var(--have-bg); color: var(--have); }
+  .stat[data-status="进行中"] span { background: var(--wip-bg); color: var(--wip); }
+  .stat.is-zero b { color: var(--faint); }
+  .mix {
+    display: flex;
+    width: 100%;
+    height: 2px;
+    margin-top: 10px;
+    background: transparent;
+  }
+  .mix span { display: block; height: 100%; }
+  .s-have { background: var(--have); }
+  .s-wip { background: var(--wip); }
+  .s-none { background: #c5c5c5; }
+
+  .quiet {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 28px;
+    color: var(--faint);
+  }
+  .quiet h2 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--faint);
+  }
+  .quiet .ct {
+    margin-left: auto;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .group-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    align-items: stretch;
+  }
+  .group-card {
+    height: 100%;
+    margin: 0;
+    padding: 14px 0 4px;
+    background: transparent;
+    border-radius: 0;
+    border-top: 1px solid var(--line);
+  }
+  .group-grid > .group-card:nth-child(-n + 2) { border-top: 0; }
+  .group-grid .group-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .group-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "name count" "sum count" "tag count";
+    column-gap: 12px;
+    row-gap: 2px;
+    align-items: start;
+    padding-bottom: 8px;
+  }
+  .group-count {
+    grid-area: count;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.35;
+    font-variant-numeric: tabular-nums;
+    color: var(--faint);
+  }
+  .field-value .pill { margin-top: 0; }
+  .group-count small {
+    margin-left: 2px;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--faint);
+  }
+  .group-copy { display: contents; }
+  .group-card h3 {
+    grid-area: name;
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  .group-card .sum {
+    grid-area: sum;
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .group-card .pill { grid-area: tag; justify-self: start; }
+  .pill, .chip-status {
+    display: inline-flex;
+    align-items: center;
+    height: 22px;
+    margin-top: 6px;
+    padding: 0 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .pill[data-status="已完成"],
+  .card[data-status="已完成"] .chip-status { background: var(--have-bg); color: var(--have); }
+  .pill[data-status="进行中"],
+  .card[data-status="进行中"] .chip-status { background: var(--wip-bg); color: var(--wip); }
+
+  .cards, .leaf-grid {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+  }
+  .leaf-grid { margin-top: 8px; }
+
+  .card, .leaf-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 12px;
+    width: 100%;
+    min-height: 40px;
+    padding: 8px 0;
+    border: 0;
+    border-bottom: 1px solid #f0f1f4;
+    border-radius: 0;
+    background: transparent;
+    color: var(--text);
+    text-align: left;
+  }
+  .leaf-card { align-items: center; height: auto; }
+  .card-name, .leaf-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--text);
+  }
+  .card-name::before, .leaf-name::before {
+    content: "";
+    flex: 0 0 auto;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--faint);
+  }
+  .card[data-status="已完成"] .card-name::before,
+  .leaf-card[data-status="已完成"] .leaf-name::before { background: var(--have); }
+  .card[data-status="进行中"] .card-name::before,
+  .leaf-card[data-status="进行中"] .leaf-name::before { background: #d3924a; }
+  .card .chip-status, .leaf-card .pill { margin-top: 0; justify-self: end; }
+  .leaf-copy {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .leaf-sum {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .foot {
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+    padding-bottom: 24px;
+  }
+  .foot h2 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .foot p {
+    margin: 8px 0 0;
+    max-width: 42em;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  @media (max-width: 960px) {
+    .wrap { padding-left: 20px; padding-right: 20px; }
+    .opening-top { flex-direction: column; align-items: flex-start; }
+    #main { grid-template-columns: 1fr 1fr; }
+    #principles, #experience, #input, #patterns, #platform, #devices, #components {
+      grid-column: auto;
+      grid-row: auto;
+    }
+    #components { grid-column: 1 / -1; }
+    .group-grid, .cards, .leaf-grid { grid-template-columns: 1fr; }
+    .seg {
+      grid-template-columns: 24px minmax(0, 1fr) 28px;
+      grid-template-areas: "idx name count" "bar bar bar";
+      gap: 8px 12px;
+      min-height: 44px;
+      padding: 4px 0;
+    }
+    .seg-index { grid-area: idx; }
+    .seg-name { grid-area: name; }
+    .seg-count { grid-area: count; }
+    .seg-track { grid-area: bar; }
+  }
+
+  @media (max-width: 720px) {
+    #main { grid-template-columns: 1fr; }
+    #principles, #input, #devices, #experience, #patterns, #components, #platform {
+      grid-column: 1 / -1;
+      grid-row: auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到分类</a>
+<header class="opening wrap" id="opening"></header>
+<div class="tools" id="tools-bar">
+  <div class="tools-inner wrap" id="tools"></div>
+</div>
+<div class="dist wrap" id="dist" hidden></div>
+<div class="workspace wrap">
+  <main id="main"></main>
+</div>
+<footer class="foot wrap">
+  <h2>文档范围</h2>
+  <p>页面文字来自《HyperOS 设计与开发平台全景图》里的一张总表。飞书子页、组件规格、示意图、链接、负责人和时间不在这份 Markdown 里。</p>
+  <p>「㝵航」「Empty Stat」按原文显示。原文里的「已有」显示为「已完成」。子分类标了「进行中」、条目本身没写状态的，显示为「进行中」。</p>
+</footer>
+<script>
+const DATA = JSON.parse(document.getElementById("data").textContent);
+
+const state = {
+  status: "all",
+  distOpen: false,
+  current: DATA.categories[0].id
+};
+
+const STATUS_ORDER = ["已完成", "进行中"];
+
+function el(tag, attrs = {}, children = []) {
+  const node = document.createElement(tag);
+  Object.entries(attrs).forEach(([key, value]) => {
+    if (value == null || value === false) return;
+    if (key === "class") node.className = value;
+    else if (key.startsWith("on")) node.addEventListener(key.slice(2), value);
+    else node.setAttribute(key, value === true ? "" : String(value));
+  });
+  children.flat().forEach((child) => {
+    if (child == null || child === false) return;
+    node.append(child instanceof Node ? child : document.createTextNode(String(child)));
+  });
+  return node;
+}
+
+function pad(n) {
+  return String(n).padStart(2, "0");
+}
+
+function isSection(group) {
+  return Array.isArray(group.items) && group.items.length > 0;
+}
+
+function cardRecords(cat) {
+  const list = [];
+  cat.groups.forEach((group, gi) => {
+    if (isSection(group)) {
+      group.items.forEach((item, ii) => {
+        list.push({ key: cat.id + ":" + gi + ":" + ii, cat, group, item, leaf: false });
+      });
+    } else {
+      list.push({ key: cat.id + ":" + gi, cat, group, item: group, leaf: true });
+    }
+  });
+  return list;
+}
+
+function allRecords() {
+  return DATA.categories.flatMap(cardRecords);
+}
+
+function statusLabel(status) {
+  if (status === "进行中") return "进行中";
+  return "已完成";
+}
+
+function cardStatus(rec) {
+  if (rec.item.status) return rec.item.status;
+  if (rec.group && rec.group !== rec.item && rec.group.status) return rec.group.status;
+  return null;
+}
+
+function textOf(rec) {
+  const item = rec.item;
+  const bits = [item.name, item.en, item.summary, item.note, rec.cat.name, rec.group.name];
+  if (!rec.leaf && rec.group.summary) bits.push(rec.group.summary);
+  if (item.points) bits.push(item.points.join(" "));
+  if (item.paired) bits.push(item.paired.name, (item.paired.points || []).join(" "));
+  return bits.filter(Boolean).join("\n");
+}
+
+function matches(rec) {
+  if (state.status !== "all" && statusLabel(cardStatus(rec)) !== state.status) return false;
+  return true;
+}
+
+function countByStatus(records) {
+  const counts = { "已完成": 0, "进行中": 0 };
+  records.forEach((rec) => { counts[statusLabel(cardStatus(rec))] += 1; });
+  return counts;
+}
+
+function groupCount() {
+  return DATA.categories.reduce((sum, cat) => sum + cat.groups.length, 0);
+}
+
+function catCount(cat) {
+  return cardRecords(cat).length;
+}
+
+function syncToolsHeight() {
+  const bar = document.getElementById("tools-bar");
+  document.documentElement.style.setProperty("--tools-h", bar.offsetHeight + "px");
+}
+
+function renderOpening() {
+  const records = allRecords();
+  const root = document.getElementById("opening");
+  const stats = el("div", { class: "stats" }, [
+    stat(DATA.categories.length, "大分类"),
+    stat(groupCount(), "子分类"),
+    stat(records.length, "条目")
+  ]);
+  const maxCount = Math.max(...DATA.categories.map(catCount));
+  const panorama = el("div", {
+    class: "panorama",
+    "aria-label": "各大分类条目数，条宽按条目数"
+  });
+  DATA.categories.forEach((cat) => {
+    const count = catCount(cat);
+    const button = el("button", {
+      class: "seg",
+      type: "button",
+      "data-cat-link": cat.id,
+      "aria-label": pad(cat.index) + " " + cat.name + "，" + count + " 条"
+    }, [
+      el("span", { class: "seg-index" }, [pad(cat.index)]),
+      el("span", { class: "seg-name" }, [cat.name]),
+      el("span", { class: "seg-count" }, [String(count)]),
+      el("span", { class: "seg-track", "aria-hidden": "true" }, [
+        el("span", { class: "seg-fill" })
+      ])
+    ]);
+    button.style.setProperty("--w", String(count / maxCount));
+    button.addEventListener("click", () => goTo(cat.id));
+    panorama.append(button);
+  });
+
+  root.replaceChildren(
+    el("div", { class: "opening-top" }, [
+      el("div", {}, [
+        el("h1", {}, [DATA.title]),
+        el("p", { class: "source" }, ["来源只有一张总表，没有子页正文。"])
+      ]),
+      stats
+    ])
+  );
+  document.getElementById("dist").replaceChildren(
+    el("div", { class: "panorama-block" }, [
+      panorama,
+      el("p", { class: "caption" }, ["条宽按条目数。点按进入该分类。"])
+    ])
+  );
+}
+
+function stat(value, label) {
+  return el("div", {}, [
+    el("b", {}, [String(value)]),
+    el("span", {}, [label])
+  ]);
+}
+
+function renderTools() {
+  const totals = countByStatus(allRecords());
+  const filters = el("div", { class: "filters", role: "group", "aria-label": "按状态筛选" });
+  const allBtn = el("button", {
+    class: "filter",
+    type: "button",
+    "data-status-filter": "all",
+    "aria-pressed": "true"
+  }, ["全部"]);
+  allBtn.addEventListener("click", () => setStatus("all"));
+  filters.append(allBtn);
+  STATUS_ORDER.forEach((name) => {
+    const btn = el("button", {
+      class: "filter",
+      type: "button",
+      "data-status-filter": name,
+      "aria-pressed": "false"
+    }, [name + " " + totals[name]]);
+    btn.addEventListener("click", () => setStatus(name));
+    filters.append(btn);
+  });
+  filters.append(el("p", { class: "shown", id: "shown" }, [""]));
+  const distBtn = el("button", {
+    class: "filter",
+    id: "dist-toggle",
+    type: "button",
+    "aria-expanded": "false",
+    "aria-controls": "dist"
+  }, ["条目分布"]);
+  distBtn.addEventListener("click", () => {
+    state.distOpen = !state.distOpen;
+    paintDist();
+  });
+  document.getElementById("tools").replaceChildren(filters, distBtn);
+}
+
+function paintDist() {
+  const dist = document.getElementById("dist");
+  const btn = document.getElementById("dist-toggle");
+  dist.hidden = !state.distOpen;
+  if (btn) {
+    btn.setAttribute("aria-expanded", state.distOpen ? "true" : "false");
+    btn.textContent = state.distOpen ? "收起分布" : "条目分布";
+  }
+}
+
+function setStatus(status) {
+  state.status = status;
+  renderResults();
+}
+
+function renderNav(visible) {
+  const nav = document.getElementById("nav");
+  const list = el("div", {});
+  DATA.categories.forEach((cat) => {
+    const count = visible.filter((rec) => rec.cat === cat).length;
+    const link = el("a", {
+      class: "nav-link t" + cat.index,
+      href: "#" + cat.id,
+      "data-cat-link": cat.id
+    }, [
+      el("span", { class: "mark", "aria-hidden": "true" }),
+      el("span", { class: "idx" }, [pad(cat.index)]),
+      el("span", { class: "nm" }, [cat.name]),
+      el("span", { class: "ct" }, [String(count)])
+    ]);
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      goTo(cat.id);
+    });
+    list.append(link);
+  });
+  nav.replaceChildren(el("p", { class: "nav-label" }, ["大分类"]), list);
+}
+
+function goTo(id) {
+  state.current = id;
+  paintCurrent();
+  const node = document.getElementById(id);
+  if (!node) return;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  node.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  history.replaceState(null, "", "#" + id);
+}
+
+function paintCurrent() {
+  document.querySelectorAll("[data-cat-link]").forEach((node) => {
+    const on = node.dataset.catLink === state.current;
+    if (node.classList.contains("nav-link")) {
+      if (on) node.setAttribute("aria-current", "page");
+      else node.removeAttribute("aria-current");
+    } else if (on) node.setAttribute("aria-current", "location");
+    else node.removeAttribute("aria-current");
+  });
+}
+
+function renderMain(visible) {
+  const main = document.getElementById("main");
+  main.replaceChildren();
+  const ordered = [...DATA.categories].sort((a, b) => {
+    if (a.id === "components") return -1;
+    if (b.id === "components") return 1;
+    return a.index - b.index;
+  });
+  ordered.forEach((cat) => {
+    const recs = visible.filter((rec) => rec.cat === cat);
+    main.append(recs.length ? fullCategory(cat, recs) : quietCategory(cat));
+  });
+}
+
+function quietCategory(cat) {
+  return el("section", { class: "category is-quiet t" + cat.index, id: cat.id }, [
+    el("div", { class: "quiet" }, [
+      el("span", { class: "mark", "aria-hidden": "true" }),
+      el("h2", {}, [cat.name]),
+      el("span", { class: "ct" }, ["0"])
+    ])
+  ]);
+}
+
+function statusKey(name) {
+  if (name === "进行中") return "wip";
+  return "have";
+}
+
+function statTile(name, count) {
+  return el("div", {
+    class: count === 0 ? "stat is-zero" : "stat",
+    "data-status": name
+  }, [
+    el("b", {}, [String(count)]),
+    el("span", {}, [name])
+  ]);
+}
+
+function mixBar(counts) {
+  const total = STATUS_ORDER.reduce((sum, name) => sum + counts[name], 0);
+  return el("div", {
+    class: "mix",
+    role: "img",
+    "aria-label": "状态占比，" + STATUS_ORDER.map((name) => name + " " + counts[name]).join("，")
+  }, STATUS_ORDER.filter((name) => counts[name] > 0).map((name) => (
+    el("span", {
+      class: "s-" + statusKey(name),
+      style: "width:" + (counts[name] / total * 100) + "%"
+    })
+  )));
+}
+
+function fullCategory(cat, recs) {
+  const counts = countByStatus(recs);
+  const head = el("header", { class: "cat-head" }, [
+    el("div", { class: "cat-line" }, [
+      el("span", { class: "mark", "aria-hidden": "true" }),
+      el("h2", {}, [cat.name]),
+      el("span", { class: "cat-summary" }, [cat.summary])
+    ]),
+    el("div", { class: "stat-row" }, STATUS_ORDER.map((name) => statTile(name, counts[name])))
+  ]);
+
+  const body = el("div", { class: "cat-body" });
+  let groupGrid = null;
+  blocksOf(cat, recs).forEach((block) => {
+    if (block.type === "section") {
+      if (!groupGrid) {
+        groupGrid = el("div", { class: "group-grid" });
+        body.append(groupGrid);
+      }
+      groupGrid.append(groupCard(block.group, block.recs));
+    } else {
+      groupGrid = null;
+      body.append(el("div", { class: "leaf-grid" }, block.recs.map(leafCard)));
+    }
+  });
+  return el("section", { class: "category t" + cat.index, id: cat.id }, [head, body]);
+}
+
+function blocksOf(cat, recs) {
+  const blocks = [];
+  let leaves = [];
+  const flush = () => {
+    if (!leaves.length) return;
+    blocks.push({ type: "leaves", recs: leaves });
+    leaves = [];
+  };
+  cat.groups.forEach((group) => {
+    const groupRecs = recs.filter((rec) => rec.group === group);
+    if (!groupRecs.length) return;
+    if (isSection(group)) {
+      flush();
+      blocks.push({ type: "section", group, recs: groupRecs });
+    } else leaves.push(groupRecs[0]);
+  });
+  flush();
+  return blocks;
+}
+
+function groupCard(group, recs) {
+  const label = group.status ? statusLabel(group.status) : "";
+  const showLabel = label && label !== "已完成";
+  return el("div", { class: "group-card" }, [
+    el("div", { class: "group-top" }, [
+      el("div", { class: "group-copy" }, [
+        el("h3", {}, [group.name]),
+        group.summary ? el("p", { class: "sum" }, [group.summary]) : null,
+        showLabel ? el("span", { class: "pill", "data-status": label }, [label]) : null
+      ]),
+      el("div", { class: "group-count" }, [
+        String(recs.length),
+        el("small", {}, ["条"])
+      ])
+    ]),
+    el("div", { class: "cards" }, recs.map(chipButton))
+  ]);
+}
+
+function chipButton(rec) {
+  const label = statusLabel(cardStatus(rec));
+  return itemButton(rec, "card", [
+    el("span", { class: "card-name" }, [rec.item.name]),
+    el("span", { class: "chip-status" }, [label])
+  ]);
+}
+
+function leafCard(rec) {
+  const label = statusLabel(cardStatus(rec));
+  return itemButton(rec, "leaf-card", [
+    el("span", { class: "leaf-copy" }, [
+      el("span", { class: "leaf-name" }, [rec.item.name]),
+      rec.item.summary ? el("span", { class: "leaf-sum" }, [rec.item.summary]) : null
+    ]),
+    el("span", { class: "pill", "data-status": label }, [label])
+  ]);
+}
+
+function itemButton(rec, className, children) {
+  const label = statusLabel(cardStatus(rec));
+  return el("div", {
+    class: className,
+    "data-key": rec.key,
+    "data-status": label
+  }, children);
+}
+
+function renderResults() {
+  const visible = allRecords().filter(matches);
+  renderMain(visible);
+  const shown = document.getElementById("shown");
+  if (shown) shown.textContent = visible.length + " 条";
+  document.querySelectorAll("[data-status-filter]").forEach((btn) => {
+    const on = btn.dataset.statusFilter === state.status;
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+  });
+  paintCurrent();
+}
+
+let spy;
+function bindSpy() {
+  if (spy) spy.disconnect();
+  spy = new IntersectionObserver((entries) => {
+    const hit = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!hit) return;
+    state.current = hit.target.id;
+    paintCurrent();
+  }, { rootMargin: "-15% 0px -75% 0px", threshold: [0.1, 0.4] });
+  document.querySelectorAll(".category").forEach((node) => spy.observe(node));
+}
+
+const renderResultsBase = renderResults;
+renderResults = function renderResultsWithSpy() {
+  renderResultsBase();
+  bindSpy();
+};
+
+renderOpening();
+renderTools();
+paintDist();
+renderResults();
+syncToolsHeight();
+window.addEventListener("resize", syncToolsHeight);
+if (location.hash) {
+  const node = document.querySelector(location.hash);
+  if (node) node.scrollIntoView();
+}
+</script>
+</body>
+</html>
