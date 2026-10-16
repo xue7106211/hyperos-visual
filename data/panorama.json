@@ -26,7 +26,8 @@
                   "层次组织",
                   "导航路径"
                 ]
-              }
+              },
+              "en": "Hierarchy"
             },
             {
               "name": "清晰",
@@ -44,7 +45,8 @@
                   "菜单行为",
                   "触觉与动效反馈"
                 ]
-              }
+              },
+              "en": "Clarity"
             },
             {
               "name": "一致",
@@ -61,14 +63,19 @@
                   "信息结构",
                   "软硬件形态协调"
                 ]
-              }
+              },
+              "en": "Consistency"
             }
-          ]
+          ],
+          "en": "System Principles"
         },
         {
-          "name": "组件与控件设计原则"
+          "name": "组件与控件设计原则",
+          "en": "Component Principles",
+          "summary": "组件在具体界面里的选用依据"
         }
-      ]
+      ],
+      "en": "Design Principles"
     },
     {
       "id": "experience",
@@ -82,66 +89,86 @@
           "items": [
             {
               "name": "色彩",
-              "status": "已有"
+              "status": "已有",
+              "en": "Color",
+              "summary": "界面颜色的角色与用法"
             },
             {
               "name": "圆角",
-              "status": "已有"
+              "status": "已有",
+              "en": "Corner Radius",
+              "summary": "容器与控件的圆角规格"
             },
             {
               "name": "字体排版",
-              "status": "已有"
+              "status": "已有",
+              "en": "Typography",
+              "summary": "字号、字重与行高规则"
             },
             {
               "name": "材质",
-              "status": "已有"
+              "status": "已有",
+              "en": "Material",
+              "summary": "表面质感与层次表现"
             },
             {
               "name": "图标",
-              "status": "已有"
+              "status": "已有",
+              "en": "Icon",
+              "summary": "图标的绘制与使用规范"
             }
-          ]
+          ],
+          "en": "Visual Style"
         },
         {
           "name": "Design Token",
-          "status": "已有"
+          "status": "已有",
+          "summary": "把颜色、字号、间距等决策写成可复用变量"
         },
         {
           "name": "布局框架",
           "summary": "界面骨架的构建规则",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Layout"
         },
         {
           "name": "页面导航与流转",
           "summary": "界面之间的连接与流转关系",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Navigation Flow"
         },
         {
           "name": "层级关系",
           "summary": "信息与空间的秩序与优先级",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Hierarchy"
         },
         {
           "name": "视觉流畅动效模型",
           "summary": "界面元素运动的节奏与规则",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Motion"
         },
         {
           "name": "文案指南",
           "summary": "文字表达的规则",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Writing"
         },
         {
           "name": "无障碍设计",
           "summary": "面向所有人的可访问性基础",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Accessibility"
         },
         {
           "name": "隐私设计",
           "summary": "应用对用户隐私的处理方式",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Privacy"
         }
-      ]
+      ],
+      "en": "Experience"
     },
     {
       "id": "components",
@@ -157,54 +184,65 @@
             {
               "name": "标题栏",
               "en": "Action Bar",
-              "status": "已有"
+              "status": "已有",
+              "summary": "页面顶部的标题与操作区"
             },
             {
               "name": "㝵航",
               "en": "Navigation",
-              "status": "已有"
+              "status": "已有",
+              "summary": "在应用结构间移动的导航"
             },
             {
               "name": "分段控制按钮",
               "en": "Segmented Control Buttons",
-              "status": "已有"
+              "status": "已有",
+              "summary": "在同一层级的少数选项间切换"
             },
             {
               "name": "标签栏",
               "en": "Tabs",
-              "status": "已有"
+              "status": "已有",
+              "summary": "在并列视图间切换"
             },
             {
               "name": "搜索栏",
               "en": "Search Bar",
-              "status": "已有"
+              "status": "已有",
+              "summary": "输入关键词查找内容"
             },
             {
               "name": "侧边导航栏",
               "en": "Sidebar Navigation",
-              "status": "已有"
+              "status": "已有",
+              "summary": "在大屏上常驻的分区导航"
             },
             {
               "name": "底部工具",
               "en": "Bottom Toolbar",
-              "status": "已有"
+              "status": "已有",
+              "summary": "贴在屏幕底部的操作条"
             },
             {
               "name": "页面指示器",
               "en": "Page Indicator",
-              "status": "已有"
+              "status": "已有",
+              "summary": "表示当前所在页与总页数"
             },
             {
               "name": "索引",
               "en": "Index Bar",
-              "status": "进行中"
+              "status": "进行中",
+              "summary": "按字母或分组快速定位"
             },
             {
               "name": "滚动条",
               "en": "Scrollbar",
-              "status": "已有"
+              "status": "已有",
+              "summary": "表示滚动位置与内容长度"
             }
-          ]
+          ],
+          "en": "Navigation & Search"
         },
         {
           "name": "展示类",
@@ -213,48 +251,64 @@
             {
               "name": "列表",
               "en": "List",
-              "status": "已有"
+              "status": "已有",
+              "summary": "按行排列的一组同类内容"
             },
             {
               "name": "卡片",
               "en": "Card",
-              "status": "已有"
+              "status": "已有",
+              "summary": "承载一块独立信息的容器"
             },
             {
               "name": "徽标",
               "en": "Badge",
-              "status": "已有"
+              "status": "已有",
+              "summary": "在图标或文字上标出数量或状态"
             },
             {
               "name": "空状态",
               "en": "Empty Stat",
-              "status": "进行中"
+              "status": "进行中",
+              "summary": "没有内容时的说明与引导"
             },
             {
               "name": "气泡提示",
-              "status": "进行中"
+              "status": "进行中",
+              "en": "Tooltip",
+              "summary": "指向目标的短说明"
             },
             {
               "name": "Tag标签",
-              "status": "已有"
+              "status": "已有",
+              "en": "Tag",
+              "summary": "标记分类、状态或属性"
             },
             {
               "name": "轮播",
-              "status": "进行中"
+              "status": "进行中",
+              "en": "Carousel",
+              "summary": "一组内容的横向切换"
             },
             {
               "name": "分割器",
-              "status": "进行中"
+              "status": "进行中",
+              "en": "Divider",
+              "summary": "分隔相邻内容的细线"
             },
             {
               "name": "进度指示器",
-              "status": "进行中"
+              "status": "进行中",
+              "en": "Progress Indicator",
+              "summary": "表达任务或加载的完成程度"
             },
             {
               "name": "Toast",
-              "status": "进行中"
+              "status": "进行中",
+              "summary": "短暂出现的轻量反馈"
             }
-          ]
+          ],
+          "en": "Display"
         },
         {
           "name": "选择与输入",
@@ -263,29 +317,36 @@
           "items": [
             {
               "name": "开关",
-              "en": "Switch"
+              "en": "Switch",
+              "summary": "在开与关两个状态间切换"
             },
             {
               "name": "单选",
-              "en": "Radio"
+              "en": "Radio",
+              "summary": "在一组选项里选择一项"
             },
             {
               "name": "多选",
-              "en": "Checkbox"
+              "en": "Checkbox",
+              "summary": "在一组选项里选择多项"
             },
             {
               "name": "输入框",
-              "en": "Text Field"
+              "en": "Text Field",
+              "summary": "输入或编辑一段文字"
             },
             {
               "name": "日期/时间选择器",
-              "en": "Date/Time Picker"
+              "en": "Date/Time Picker",
+              "summary": "选择日期或时间"
             },
             {
               "name": "滑动选择器",
-              "en": "Slider"
+              "en": "Slider",
+              "summary": "在一段范围内选取数值"
             }
-          ]
+          ],
+          "en": "Selection & Input"
         },
         {
           "name": "容器类",
@@ -294,17 +355,21 @@
           "items": [
             {
               "name": "弹窗",
-              "en": "Dialog"
+              "en": "Dialog",
+              "summary": "打断当前流程、需要处理的浮层"
             },
             {
               "name": "抽屉浮窗",
-              "en": "Bottom Sheet"
+              "en": "Bottom Sheet",
+              "summary": "从屏幕边缘滑出的面板"
             },
             {
               "name": "提示条",
-              "en": "Snackbar"
+              "en": "Snackbar",
+              "summary": "在界面底部给出可操作的提示"
             }
-          ]
+          ],
+          "en": "Containers"
         },
         {
           "name": "菜单与操作",
@@ -313,25 +378,32 @@
             {
               "name": "按钮",
               "en": "Button",
-              "status": "已有"
+              "status": "已有",
+              "summary": "触发一个明确动作"
             },
             {
               "name": "行动操作按钮",
               "en": "Floating Action Button",
-              "status": "已有"
+              "status": "已有",
+              "summary": "页面上最主要的悬浮动作"
             },
             {
               "name": "菜单",
               "en": "Menu",
-              "status": "已有"
+              "status": "已有",
+              "summary": "收纳一组相关命令"
             },
             {
               "name": "超链接",
-              "status": "进行中"
+              "status": "进行中",
+              "en": "Link",
+              "summary": "跳转到另一位置的文本"
             }
-          ]
+          ],
+          "en": "Actions"
         }
-      ]
+      ],
+      "en": "Components"
     },
     {
       "id": "patterns",
@@ -345,67 +417,85 @@
           "status": "进行中",
           "items": [
             {
-              "name": "新建模式"
+              "name": "新建模式",
+              "en": "Create Mode",
+              "summary": "创建一条新内容"
             },
             {
-              "name": "编辑模式/多选模式"
+              "name": "编辑模式/多选模式",
+              "en": "Edit / Multi-select",
+              "summary": "修改或批量处理已有内容"
             },
             {
-              "name": "搜索模式"
+              "name": "搜索模式",
+              "en": "Search Mode",
+              "summary": "在当前范围里查找内容"
             }
-          ]
+          ],
+          "en": "Page Modes"
         },
         {
           "name": "加载与刷新",
           "summary": "内容加载状态的表现方式",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Loading & Refresh"
         },
         {
           "name": "下载",
           "summary": "应用内下载",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Download"
         },
         {
           "name": "状态提示",
           "summary": "应用向用户传达的状态",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Status"
         },
         {
           "name": "启动",
           "summary": "启动页",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Launch"
         },
         {
           "name": "引导",
           "summary": "帮助用户进入与理解的模式，新功能介绍页、新功能介绍弹窗",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Onboarding"
         },
         {
           "name": "资源选择",
           "summary": "从系统资源中选取的模式",
-          "status": "已有"
+          "status": "已有",
+          "en": "Resource Picker"
         },
         {
           "name": "系统分享",
           "summary": "系统分享抽屉或弹窗",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Share"
         },
         {
           "name": "自升级",
           "summary": "自升级弹窗",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "In-app Update"
         },
         {
           "name": "系统能力衔接",
           "summary": "应用与系统服务的对接方式",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "System Integration"
         },
         {
           "name": "数据图表化",
           "summary": "数据以图形形式的呈现方式。",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Data Visualization"
         }
-      ]
+      ],
+      "en": "Patterns"
     },
     {
       "id": "input",
@@ -416,49 +506,59 @@
         {
           "name": "触控与手势",
           "summary": "屏幕上的触摸与手势操作",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Touch & Gesture"
         },
         {
           "name": "拖放操作",
           "summary": "元素拖动与放置的组合操作",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Drag & Drop"
         },
         {
           "name": "指针与光标",
           "summary": "鼠标与触控板的指针操作",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Pointer"
         },
         {
           "name": "键盘与焦点",
           "summary": "键盘输入与焦点导航",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Keyboard & Focus"
         },
         {
           "name": "手写笔",
           "summary": "手写笔的书写与绘制操作",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Stylus"
         },
         {
           "name": "语音输入",
           "summary": "通过语音进行的输入与控制",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Voice Input"
         },
         {
           "name": "隔空手势",
           "summary": "不接触屏幕的空中手势操作",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Air Gesture"
         },
         {
           "name": "硬件按钮",
           "summary": "物理按键的操作方式",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Hardware Buttons"
         },
         {
           "name": "交互归一",
           "summary": "多模态输入的统一操作映射",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Unified Input"
         }
-      ]
+      ],
+      "en": "Input"
     },
     {
       "id": "platform",
@@ -472,27 +572,42 @@
           "status": "进行中",
           "items": [
             {
-              "name": "状态栏"
+              "name": "状态栏",
+              "en": "Status Bar",
+              "summary": "展示时间、电量与系统状态"
             },
             {
-              "name": "系统虚拟导航键"
+              "name": "系统虚拟导航键",
+              "en": "Navigation Bar",
+              "summary": "屏幕底部的返回、主页与多任务"
             },
             {
-              "name": "控制杆"
+              "name": "控制杆",
+              "en": "Control Handle",
+              "summary": "呼出控制中心的系统入口"
             },
             {
-              "name": "超级岛"
+              "name": "超级岛",
+              "en": "HyperIsland",
+              "summary": "前台活动的动态摘要"
             },
             {
-              "name": "通知"
+              "name": "通知",
+              "en": "Notification",
+              "summary": "系统与应用发出的消息提醒"
             },
             {
-              "name": "小部件"
+              "name": "小部件",
+              "en": "Widget",
+              "summary": "放在桌面上的信息与快捷操作"
             },
             {
-              "name": "虚拟键盘"
+              "name": "虚拟键盘",
+              "en": "Keyboard",
+              "summary": "系统提供的文字输入键盘"
             }
-          ]
+          ],
+          "en": "System UI"
         },
         {
           "name": "窗口与任务",
@@ -500,35 +615,48 @@
           "status": "进行中",
           "items": [
             {
-              "name": "多任务"
+              "name": "多任务",
+              "en": "Recents",
+              "summary": "查看并切换最近使用的应用"
             },
             {
-              "name": "多窗口"
+              "name": "多窗口",
+              "en": "Multi-window",
+              "summary": "同时摆放多个应用窗口"
             },
             {
-              "name": "画中画"
+              "name": "画中画",
+              "en": "Picture in Picture",
+              "summary": "以小窗继续当前内容"
             },
             {
-              "name": "分屏"
+              "name": "分屏",
+              "en": "Split Screen",
+              "summary": "两个应用并排显示"
             }
-          ]
+          ],
+          "en": "Windows & Tasks"
         },
         {
           "name": "系统服务",
           "summary": "应用调用的系统级能力",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "System Services"
         },
         {
           "name": "设备能力 / 当前阶段无关联",
           "summary": "硬件资源的访问接口",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Device Capabilities"
         },
         {
           "name": "系统安全能力",
           "summary": "应用调用的身份与安全能力",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Security"
         }
-      ]
+      ],
+      "en": "Platform"
     },
     {
       "id": "devices",
@@ -542,27 +670,37 @@
           "status": "进行中",
           "items": [
             {
-              "name": "手机"
+              "name": "手机",
+              "en": "Phone",
+              "summary": "直板手机上的布局与操作"
             },
             {
-              "name": "折叠屏"
+              "name": "折叠屏",
+              "en": "Foldable",
+              "summary": "折叠与展开两种形态的适配"
             },
             {
-              "name": "平板"
+              "name": "平板",
+              "en": "Tablet",
+              "summary": "大屏上的布局与操作"
             }
-          ]
+          ],
+          "en": "Device Traits"
         },
         {
           "name": "设备互通 / 跨设备协同",
           "summary": "设备之间的连接与协同方式",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Cross-device"
         },
         {
           "name": "应用最佳实践",
           "summary": "应用层面的适配与场景实践",
-          "status": "进行中"
+          "status": "进行中",
+          "en": "Best Practices"
         }
-      ]
+      ],
+      "en": "Multi-device"
     }
   ]
 }

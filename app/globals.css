@@ -14,6 +14,15 @@
   --amber-soft: #f8f1e4;
   --amber-bar: #f0b429;
   --sidebar: 248px;
+  --border-hairline: 1px;
+  --elevation-raised: 0 0 0 1px rgb(0 0 0 / 0.05), 0 1px 3px rgb(0 0 0 / 0.05), 0 4px 10px -4px rgb(0 0 0 / 0.05);
+}
+
+@media only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi) {
+  :root {
+    --border-hairline: 0.5px;
+  }
 }
 
 @theme inline {
@@ -21,6 +30,10 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --z-index-header: 20;
+}
+
+@utility shadow-raised {
+  box-shadow: var(--elevation-raised);
 }
 
 body {

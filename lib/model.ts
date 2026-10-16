@@ -14,6 +14,7 @@ export type Item = {
 
 export type Group = {
   name: string;
+  en?: string;
   summary?: string;
   status?: string;
   items?: Item[];
@@ -23,6 +24,7 @@ export type Category = {
   id: string;
   index: number;
   name: string;
+  en?: string;
   summary: string;
   groups: Group[];
 };
@@ -46,6 +48,7 @@ export type Row = {
 export type CardModel = {
   key: string;
   name: string;
+  en?: string;
   summary?: string;
   rows: Row[];
 };
@@ -92,6 +95,7 @@ export function cardsFor(category: Category, filter: Status | "all"): CardModel[
         cards.push({
           key: `${category.id}-${index}`,
           name: group.name,
+          en: group.en,
           summary: group.summary,
           rows,
         });
@@ -103,6 +107,7 @@ export function cardsFor(category: Category, filter: Status | "all"): CardModel[
       cards.push({
         key: row.key,
         name: group.name,
+        en: group.en,
         summary: group.summary,
         rows: [row],
       });

@@ -36,8 +36,12 @@ const FILTERS: { id: Status | "all"; label: string }[] = [
   { id: "进行中", label: "进行中" },
 ];
 
-const pressable =
-  "font-medium transition-[color,background-color,transform] duration-150 ease-out active:scale-[0.96] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b1e23]";
+const focusRing =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b1e23]";
+
+const selectable = `font-medium ${focusRing}`;
+
+const pressable = `font-medium transition-[scale] duration-150 ease-out active:scale-[0.96] motion-reduce:transition-none motion-reduce:active:scale-100 ${focusRing}`;
 
 export function Panorama() {
   const categories = useMemo(() => orderedCategories(data.categories), []);
@@ -70,18 +74,19 @@ export function Panorama() {
     return () => observer.disconnect();
   }, [sections]);
 
-  function openSection(id: string) {
+  function openSection(id: string, event: { detail: number }) {
     setCurrent(id);
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const fromKeyboard = event.detail === 0;
     document.getElementById(id)?.scrollIntoView({
-      behavior: reduce ? "auto" : "smooth",
+      behavior: reduce || fromKeyboard ? "auto" : "smooth",
       block: "start",
     });
   }
 
   return (
     <div className="min-h-screen bg-white">
-      <header className="sticky top-0 z-header flex flex-wrap items-center gap-x-6 gap-y-3 border-b border-[#eceef2] bg-white py-3 pr-[max(1.5rem,env(safe-area-inset-right))] pl-[max(1.5rem,env(safe-area-inset-left))] md:h-16 md:flex-nowrap md:py-0">
+      <header className="sticky top-0 z-header flex flex-wrap items-center gap-x-6 gap-y-3 border-b-[length:var(--border-hairline)] border-[#eceef2] bg-white py-3 pr-[max(1.5rem,env(safe-area-inset-right))] pl-[max(1.5rem,env(safe-area-inset-left))] md:h-16 md:flex-nowrap md:py-0">
         <div className="flex min-w-0 items-center gap-3">
           <img
             src="/xiaomi-hyperos-logo.png"
@@ -95,7 +100,7 @@ export function Panorama() {
             {data.title}
           </p>
         </div>
-        <div className="flex w-full rounded-xl border border-[#e7e9ee] bg-white p-1 md:ml-auto md:w-auto">
+        <div className="flex w-full rounded-xl bg-white p-1 shadow-raised md:ml-auto md:w-auto">
           {FILTERS.map((item) => {
             const on = filter === item.id;
             const count =
@@ -106,7 +111,7 @@ export function Panorama() {
                 type="button"
                 aria-pressed={on}
                 onClick={() => setFilter(item.id)}
-                className={`h-11 flex-1 rounded-lg px-3 text-[13px] md:flex-none ${pressable} ${
+                className={`h-11 flex-1 rounded-lg px-3 text-[13px] md:flex-none ${selectable} ${
                   on ? "bg-[#f3f4f6] text-[#1b1e23]" : "text-[#5c6570] hover:bg-[#f7f8fa]"
                 }`}
               >
@@ -121,7 +126,7 @@ export function Panorama() {
       </header>
 
       <div className="flex">
-        <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-[248px] shrink-0 overflow-auto border-r border-[#eceef2] px-3 py-4 md:block">
+        <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-[248px] shrink-0 overflow-auto border-r-[length:var(--border-hairline)] border-[#eceef2] px-3 py-4 md:block">
           <p className="px-3 pb-2 text-xs text-[#8b939c]">分类</p>
           <nav className="flex flex-col gap-1">
             {sections.map(({ category, cards }) => {
@@ -132,8 +137,8 @@ export function Panorama() {
                 <button
                   key={category.id}
                   type="button"
-                  onClick={() => openSection(category.id)}
-                  className={`flex min-h-11 w-full items-center gap-3 rounded-xl px-3 text-left text-[13px] ${pressable} ${
+                  onClick={(event) => openSection(category.id, event)}
+                  className={`flex min-h-11 w-full items-center gap-3 rounded-xl px-3 text-left text-[13px] ${selectable} ${
                     on ? "bg-[#f3f4f6] text-[#1b1e23]" : "text-[#3c4450] hover:bg-[#f7f8fa]"
                   }`}
                 >
@@ -147,7 +152,7 @@ export function Panorama() {
         </aside>
 
         <main className="min-w-0 flex-1 py-8 pr-[max(1.5rem,env(safe-area-inset-right))] pl-[max(1.5rem,env(safe-area-inset-left))] md:pr-10 md:pl-10">
-          <section className="border-b border-[#eceef2] pb-8">
+          <section className="border-b-[length:var(--border-hairline)] border-[#eceef2] pb-8">
             <p className="text-xs font-medium tracking-[0.14em] text-[#ef3124]">条目合计</p>
             <p className="mt-3 text-6xl font-semibold tracking-tight tabular-nums">{totals.total}</p>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#8b939c]">
@@ -171,8 +176,8 @@ export function Panorama() {
               <button
                 key={category.id}
                 type="button"
-                onClick={() => openSection(category.id)}
-                className={`min-h-11 shrink-0 rounded-full px-4 text-[13px] ${pressable} ${
+                onClick={(event) => openSection(category.id, event)}
+                className={`min-h-11 shrink-0 rounded-full px-4 text-[13px] ${selectable} ${
                   current === category.id
                     ? "bg-[#f3f4f6] text-[#1b1e23]"
                     : "text-[#5c6570] hover:bg-[#f7f8fa]"
@@ -190,11 +195,16 @@ export function Panorama() {
                 key={category.id}
                 id={category.id}
                 data-section
-                className="scroll-mt-32 border-b border-[#f0f1f4] py-10 md:scroll-mt-20"
+                className="scroll-mt-32 border-b-[length:var(--border-hairline)] border-[#f0f1f4] py-10 md:scroll-mt-20"
               >
                 <div className="flex items-end justify-between gap-4">
                   <div>
-                    <h2 className="text-balance text-xl font-semibold tracking-tight">{category.name}</h2>
+                    <h2 className="text-balance text-xl font-semibold tracking-tight">
+                      {category.name}
+                      {category.en ? (
+                        <span className="ml-2 text-base font-normal text-[#8b939c]">{category.en}</span>
+                      ) : null}
+                    </h2>
                     <p className="mt-1 text-sm text-[#8b939c]">{category.summary}</p>
                   </div>
                   <p className="shrink-0 tabular-nums leading-none">
@@ -307,10 +317,15 @@ function MetricCard({ card }: { card: CardModel }) {
   const tone = done === total ? "#178a45" : wip === total ? "#9a6230" : "#1b1e23";
 
   return (
-    <article className="flex h-full flex-col rounded-2xl border border-[#e6e8ec] bg-white p-5">
+    <article className="flex h-full flex-col rounded-2xl bg-white p-5 shadow-raised">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <h3 className="text-balance text-[15px] font-semibold leading-snug">{card.name}</h3>
+          <h3 className="text-balance text-[15px] font-semibold leading-snug">
+            {card.name}
+            {card.en && card.en !== card.name ? (
+              <span className="ml-2 text-[13px] font-normal text-[#8b939c]">{card.en}</span>
+            ) : null}
+          </h3>
           {card.summary ? <p className="mt-1 text-xs leading-5 text-[#8b939c]">{card.summary}</p> : null}
         </div>
         <p className="shrink-0 text-xs tabular-nums text-[#8b939c]">{total} 条</p>
@@ -340,23 +355,26 @@ function MetricCard({ card }: { card: CardModel }) {
 
       {single ? (
         <div className="mt-4">
-          <DetailBits row={card.rows[0]} includeEn />
+          <DetailBits row={card.rows[0]} />
           <div className="mt-3">
             <StatusPill status={card.rows[0].status} />
           </div>
         </div>
       ) : (
-        <ul className="mt-4 border-t border-[#f2f3f5]">
+        <ul className="mt-4 border-t-[length:var(--border-hairline)] border-[#f2f3f5]">
           {card.rows.map((row) => (
             <li
               key={row.key}
-              className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3 border-b border-[#f2f3f5] py-2.5 last:border-b-0"
+              className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3 border-b-[length:var(--border-hairline)] border-[#f2f3f5] py-2.5 last:border-b-0"
             >
               <div className="min-w-0">
                 <p className="text-[13px] font-medium leading-5">
                   {row.name}
-                  {row.en ? <span className="ml-2 font-normal text-[#8b939c]">{row.en}</span> : null}
+                  {row.en && row.en !== row.name ? (
+                    <span className="ml-2 font-normal text-[#8b939c]">{row.en}</span>
+                  ) : null}
                 </p>
+                {row.summary ? <p className="mt-1 text-xs leading-5 text-[#8b939c]">{row.summary}</p> : null}
                 <DetailBits row={row} />
               </div>
               <StatusPill status={row.status} />
@@ -370,13 +388,10 @@ function MetricCard({ card }: { card: CardModel }) {
 
 function DetailBits({
   row,
-  includeEn = false,
 }: {
-  row: { en?: string; points?: string[]; pairedName?: string; note?: string };
-  includeEn?: boolean;
+  row: { points?: string[]; pairedName?: string; note?: string };
 }) {
   const bits = [
-    includeEn ? row.en : null,
     row.points?.length ? row.points.join(" · ") : null,
     row.pairedName ? `配对 ${row.pairedName}` : null,
     row.note,
