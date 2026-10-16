@@ -4,10 +4,15 @@ import { useEffect, useMemo, useState } from "react";
 import {
   Compass,
   LayoutGrid,
+  ListChecks,
   MonitorSmartphone,
   MousePointer2,
   Palette,
+  Puzzle,
+  Shapes,
+  SlidersHorizontal,
   TabletSmartphone,
+  Type,
   Workflow,
   type LucideIcon,
 } from "lucide-react";
@@ -17,8 +22,22 @@ import {
   data,
   orderedCategories,
   type CardModel,
+  type Category,
   type Status,
 } from "@/lib/model";
+
+const ROW_ICONS: Record<string, LucideIcon> = {
+  "Figma UI Kit": LayoutGrid,
+  "Figma 设计变量": Palette,
+  "字体 MiSans 库": Type,
+  "字体图标 Symbol 库": Shapes,
+  "Figma 插件": Puzzle,
+  "Design Token 管理平台": SlidersHorizontal,
+  "规范检查插件": ListChecks,
+  "字体图标平台": Type,
+};
+
+const LEAF_ROWS = new Set(["kits", "plugins"]);
 
 const ICONS: Record<string, LucideIcon> = {
   components: LayoutGrid,
@@ -34,6 +53,24 @@ const FILTERS: { id: Status | "all"; label: string }[] = [
   { id: "all", label: "全部" },
   { id: "已完成", label: "已完成" },
   { id: "进行中", label: "进行中" },
+];
+
+const PILLARS: { name: string; summary: string; categoryIds: string[] }[] = [
+  {
+    name: "设计标准与指南",
+    summary: "判断怎么做的原则与规范",
+    categoryIds: ["principles", "experience", "patterns", "input", "components", "devices"],
+  },
+  {
+    name: "设计资源",
+    summary: "可直接取用的设计文件",
+    categoryIds: ["kits"],
+  },
+  {
+    name: "工具与插件",
+    summary: "设计工具与系统能力",
+    categoryIds: ["plugins", "platform"],
+  },
 ];
 
 const focusRing =
@@ -125,69 +162,28 @@ export function Panorama() {
         </div>
       </header>
 
-      <div className="flex">
-        <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-[248px] shrink-0 overflow-auto border-r-[length:var(--border-hairline)] border-[#eceef2] px-3 py-4 md:block">
-          <p className="px-3 pb-2 text-xs text-[#8b939c]">分类</p>
-          <nav className="flex flex-col gap-1">
-            {sections.map(({ category, cards }) => {
-              const Icon = ICONS[category.id] ?? LayoutGrid;
-              const on = current === category.id;
-              const count = countRows(cards).total;
-              return (
-                <button
-                  key={category.id}
-                  type="button"
-                  onClick={(event) => openSection(category.id, event)}
-                  className={`flex min-h-11 w-full items-center gap-3 rounded-xl px-3 text-left text-[13px] ${selectable} ${
-                    on ? "bg-[#f3f4f6] text-[#1b1e23]" : "text-[#3c4450] hover:bg-[#f7f8fa]"
-                  }`}
-                >
-                  <Icon className="size-4 shrink-0 text-[#6d7682]" strokeWidth={1.75} />
-                  <span className="min-w-0 flex-1 truncate">{category.name}</span>
-                  <span className="tabular-nums text-xs text-[#8b939c]">{count}</span>
-                </button>
-              );
-            })}
-          </nav>
-        </aside>
-
-        <main className="min-w-0 flex-1 py-8 pr-[max(1.5rem,env(safe-area-inset-right))] pl-[max(1.5rem,env(safe-area-inset-left))] md:pr-10 md:pl-10">
-          <section className="border-b-[length:var(--border-hairline)] border-[#eceef2] pb-8">
-            <p className="text-xs font-medium tracking-[0.14em] text-[#ef3124]">条目合计</p>
-            <p className="mt-3 text-6xl font-semibold tracking-tight tabular-nums">{totals.total}</p>
-            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#8b939c]">
-              把「设计标准与指南、设计资源、工程组件、工具与插件」统一收口为 HyperOS 设计开发平台，服务产设研测从选标准到合格交付
+      <section className="bg-[var(--summary-surface)]">
+        <div className="py-10 pr-[max(1.5rem,env(safe-area-inset-right))] pl-[max(1.5rem,env(safe-area-inset-left))] md:px-10 md:py-12">
+          <p className="text-xs font-medium tracking-[0.14em] text-[#ef3124]">条目合计</p>
+          <div className="mt-4 flex flex-wrap items-end gap-x-4 gap-y-2">
+            <p className="text-6xl font-semibold leading-none tracking-tight tabular-nums">{totals.total}</p>
+            <p className="mb-1.5 flex flex-wrap items-baseline gap-x-2 text-xl font-semibold leading-none tracking-tight tabular-nums">
+              <span className="font-medium text-[#c5cad1]">=</span>
+              <span className="text-[#178a45]">{totals.done}</span>
+              <span className="text-sm font-medium text-[#178a45]">已完成</span>
+              <span className="font-medium text-[#c5cad1]">+</span>
+              <span className="text-[#9a6230]">{totals.wip}</span>
+              <span className="text-sm font-medium text-[#9a6230]">进行中</span>
             </p>
-            <div className="mt-8 flex flex-wrap items-end gap-x-6 gap-y-4">
-              <Figure value={totals.total} label="条目" />
-              <Operator sign="=" />
-              <Figure value={totals.done} label="已完成" tone="done" />
-              <Operator sign="+" />
-              <Figure value={totals.wip} label="进行中" tone="wip" />
-            </div>
-            <div className="mt-6 flex flex-wrap gap-5 text-xs text-[#5c6570]">
-              <Legend color="#2fbe6a" text="已完成" />
-              <Legend color="#f0b429" text="进行中" />
-            </div>
-          </section>
-
-          <div className="mt-4 flex gap-2 overflow-auto pb-2 md:hidden">
-            {sections.map(({ category }) => (
-              <button
-                key={category.id}
-                type="button"
-                onClick={(event) => openSection(category.id, event)}
-                className={`min-h-11 shrink-0 rounded-full px-4 text-[13px] ${selectable} ${
-                  current === category.id
-                    ? "bg-[#f3f4f6] text-[#1b1e23]"
-                    : "text-[#5c6570] hover:bg-[#f7f8fa]"
-                }`}
-              >
-                {category.name}
-              </button>
-            ))}
           </div>
+          <p className="mt-4 text-sm leading-6 text-[#8b939c]">
+            把「设计标准与指南、设计资源、工具与插件」统一收口为 HyperOS 设计开发平台，服务产设研测从选标准到合格交付
+          </p>
+          <Overview sections={sections} current={current} onOpen={openSection} />
+        </div>
+      </section>
 
+      <main className="pt-16 pr-[max(1.5rem,env(safe-area-inset-right))] pb-8 pl-[max(1.5rem,env(safe-area-inset-left))] md:px-10">
           {sections.map(({ category, cards }) => {
             const counts = countRows(cards);
             return (
@@ -195,7 +191,7 @@ export function Panorama() {
                 key={category.id}
                 id={category.id}
                 data-section
-                className="scroll-mt-32 border-b-[length:var(--border-hairline)] border-[#f0f1f4] py-10 md:scroll-mt-20"
+                className="scroll-mt-32 border-b-[length:var(--border-hairline)] border-[#f0f1f4] py-10 first:pt-0 md:scroll-mt-20"
               >
                 <div className="flex items-end justify-between gap-4">
                   <div>
@@ -236,40 +232,104 @@ export function Panorama() {
           <p className="max-w-2xl py-8 text-xs leading-6 text-[#8b939c]">
             页面文字来自《HyperOS 设计与开发平台全景图》里的一张总表。飞书子页、组件规格、示意图、链接、负责人和时间不在这份数据里。「㝵航」「Empty Stat」按原文显示。原文里的「已有」显示为「已完成」。子分类标了「进行中」、条目本身没写状态的，显示为「进行中」。
           </p>
-        </main>
-      </div>
+      </main>
     </div>
   );
 }
 
-function Figure({
-  value,
-  label,
-  tone,
+function Overview({
+  sections,
+  current,
+  onOpen,
 }: {
-  value: number;
-  label: string;
-  tone?: "done" | "wip";
+  sections: { category: Category; cards: CardModel[] }[];
+  current: string;
+  onOpen: (id: string, event: { detail: number }) => void;
 }) {
-  const color = tone === "done" ? "text-[#178a45]" : tone === "wip" ? "text-[#9a6230]" : "text-[#1b1e23]";
+  const byId = new Map(sections.map((section) => [section.category.id, section]));
+
   return (
-    <div>
-      <p className={`text-[28px] font-semibold leading-none tracking-tight tabular-nums ${color}`}>{value}</p>
-      <p className="mt-2 text-xs text-[#8b939c]">{label}</p>
+    <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-3">
+      {PILLARS.map((pillar) => {
+        const items = pillar.categoryIds.flatMap((id) => {
+          const section = byId.get(id);
+          return section ? [section] : [];
+        });
+        const total = items.reduce((sum, item) => sum + countRows(item.cards).total, 0);
+        return (
+          <section key={pillar.name} className="flex h-full flex-col rounded-2xl bg-white p-5 shadow-raised" aria-label={pillar.name}>
+            <div className="flex items-start justify-between gap-4 px-2">
+              <div className="min-w-0">
+                <h2 className="text-base font-semibold tracking-tight">{pillar.name}</h2>
+                <p className="mt-1 text-xs leading-5 text-[#8b939c]">{pillar.summary}</p>
+              </div>
+              <p className="shrink-0 text-[32px] font-semibold leading-none tracking-tight tabular-nums">{total}</p>
+            </div>
+            {items.length ? (
+              <div className="mt-5 flex flex-1 flex-col gap-1">
+                {items.flatMap(({ category, cards }) => {
+                  const entries = LEAF_ROWS.has(category.id)
+                    ? cards.map((card) => ({
+                        key: card.key,
+                        id: category.id,
+                        name: card.name,
+                        en: card.en,
+                        summary: card.summary,
+                        counts: countRows([card]),
+                        icon: ROW_ICONS[card.name] ?? LayoutGrid,
+                      }))
+                    : [
+                          {
+                            key: category.id,
+                            id: category.id,
+                            name: category.name,
+                            en: category.en,
+                            summary: category.summary,
+                            counts: countRows(cards),
+                            icon: ICONS[category.id] ?? LayoutGrid,
+                          },
+                        ];
+                  return entries.map((entry) => {
+                    const Icon = entry.icon;
+                    const on = current === entry.id && !LEAF_ROWS.has(category.id);
+                    return (
+                      <button
+                        key={entry.key}
+                        type="button"
+                        aria-current={on ? "true" : undefined}
+                        onClick={(event) => onOpen(entry.id, event)}
+                        className={`grid min-h-11 w-full grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 rounded-xl px-2 py-2.5 text-left ${selectable} ${
+                          on ? "bg-[#f3f4f6]" : "hover:bg-[#f7f8fa]"
+                        }`}
+                      >
+                        <Icon className="mt-0.5 size-4 text-[#6d7682]" strokeWidth={1.75} />
+                        <span className="min-w-0">
+                          <span className="block text-[13px] leading-5 text-[#1b1e23]">
+                            {entry.name}
+                            {entry.en && entry.en !== entry.name ? (
+                              <span className="ml-2 font-normal text-[#8b939c]">{entry.en}</span>
+                            ) : null}
+                          </span>
+                          {entry.summary ? (
+                            <span className="mt-0.5 block text-xs leading-5 text-[#8b939c]">{entry.summary}</span>
+                          ) : null}
+                        </span>
+                        <span className="pt-0.5 text-end text-xs leading-5 whitespace-nowrap tabular-nums">
+                          <span className="block text-[#178a45]">已完成 {entry.counts.done}</span>
+                          <span className="block text-[#9a6230]">进行中 {entry.counts.wip}</span>
+                        </span>
+                      </button>
+                    );
+                  });
+                })}
+              </div>
+            ) : (
+              <p className="mt-3 px-2 text-xs leading-5 text-[#8b939c]">当前筛选下没有目录</p>
+            )}
+          </section>
+        );
+      })}
     </div>
-  );
-}
-
-function Operator({ sign }: { sign: string }) {
-  return <span className="pb-5 text-2xl font-medium text-[#c5cad1]">{sign}</span>;
-}
-
-function Legend({ color, text }: { color: string; text: string }) {
-  return (
-    <span className="inline-flex items-center gap-2">
-      <span className="pointer-events-none size-2 rounded-full" aria-hidden="true" style={{ background: color }} />
-      {text}
-    </span>
   );
 }
 
