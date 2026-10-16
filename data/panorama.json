@@ -701,6 +701,63 @@
         }
       ],
       "en": "Multi-device"
+    },
+    {
+      "id": "kits",
+      "index": 8,
+      "name": "设计资产",
+      "en": "Assets",
+      "summary": "可直接取用的设计文件",
+      "groups": [
+        {
+          "name": "Figma UI Kit",
+          "summary": "界面组件的设计源文件"
+        },
+        {
+          "name": "Figma 设计变量",
+          "en": "Figma Variables",
+          "summary": "颜色、字号与间距变量"
+        },
+        {
+          "name": "字体 MiSans 库",
+          "en": "MiSans Font",
+          "summary": "系统正文使用的 MiSans 字体"
+        },
+        {
+          "name": "字体图标 Symbol 库",
+          "en": "Symbol Library",
+          "summary": "图标符号的字体库"
+        }
+      ]
+    },
+    {
+      "id": "plugins",
+      "index": 9,
+      "name": "设计工具",
+      "en": "Tools",
+      "summary": "设计生产里使用的插件与平台",
+      "groups": [
+        {
+          "name": "Figma 插件",
+          "en": "Figma Plugin",
+          "summary": "在 Figma 里调用的设计插件"
+        },
+        {
+          "name": "Design Token 管理平台",
+          "en": "Token Platform",
+          "summary": "管理颜色、字号与间距变量"
+        },
+        {
+          "name": "规范检查插件",
+          "en": "Lint Plugin",
+          "summary": "检查界面是否符合设计规范"
+        },
+        {
+          "name": "字体图标平台",
+          "en": "Icon Platform",
+          "summary": "管理和分发字体图标"
+        }
+      ]
     }
   ]
 }
