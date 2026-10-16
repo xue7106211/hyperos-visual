@@ -506,55 +506,55 @@
         {
           "name": "触控与手势",
           "summary": "屏幕上的触摸与手势操作",
-          "status": "进行中",
+          "status": "缺失",
           "en": "Touch & Gesture"
         },
         {
           "name": "拖放操作",
           "summary": "元素拖动与放置的组合操作",
-          "status": "进行中",
+          "status": "缺失",
           "en": "Drag & Drop"
         },
         {
           "name": "指针与光标",
           "summary": "鼠标与触控板的指针操作",
-          "status": "进行中",
+          "status": "缺失",
           "en": "Pointer"
         },
         {
           "name": "键盘与焦点",
           "summary": "键盘输入与焦点导航",
-          "status": "进行中",
+          "status": "缺失",
           "en": "Keyboard & Focus"
         },
         {
           "name": "手写笔",
           "summary": "手写笔的书写与绘制操作",
-          "status": "进行中",
+          "status": "缺失",
           "en": "Stylus"
         },
         {
           "name": "语音输入",
           "summary": "通过语音进行的输入与控制",
-          "status": "进行中",
+          "status": "缺失",
           "en": "Voice Input"
         },
         {
           "name": "隔空手势",
           "summary": "不接触屏幕的空中手势操作",
-          "status": "进行中",
+          "status": "缺失",
           "en": "Air Gesture"
         },
         {
           "name": "硬件按钮",
           "summary": "物理按键的操作方式",
-          "status": "进行中",
+          "status": "缺失",
           "en": "Hardware Buttons"
         },
         {
           "name": "交互归一",
           "summary": "多模态输入的统一操作映射",
-          "status": "进行中",
+          "status": "缺失",
           "en": "Unified Input"
         }
       ],
@@ -563,8 +563,8 @@
     {
       "id": "platform",
       "index": 6,
-      "name": "系统特性与平台能力",
-      "summary": "OS 提供的能力与状态",
+      "name": "系统特性功能库",
+      "summary": "OS 提供的系统特性设计资源",
       "groups": [
         {
           "name": "系统体验",
@@ -656,7 +656,7 @@
           "en": "Security"
         }
       ],
-      "en": "Platform"
+      "en": "Feature Library"
     },
     {
       "id": "devices",
@@ -667,7 +667,7 @@
         {
           "name": "设备特性发挥",
           "summary": "各类设备的形态特性与利用方式",
-          "status": "进行中",
+          "status": "缺失",
           "items": [
             {
               "name": "手机",
@@ -690,13 +690,13 @@
         {
           "name": "设备互通 / 跨设备协同",
           "summary": "设备之间的连接与协同方式",
-          "status": "进行中",
+          "status": "缺失",
           "en": "Cross-device"
         },
         {
           "name": "应用最佳实践",
           "summary": "应用层面的适配与场景实践",
-          "status": "进行中",
+          "status": "缺失",
           "en": "Best Practices"
         }
       ],
@@ -727,6 +727,16 @@
           "name": "字体图标 Symbol 库",
           "en": "Symbol Library",
           "summary": "图标符号的字体库"
+        },
+        {
+          "name": "HyperOS 品牌资源",
+          "en": "Brand Assets",
+          "summary": "标识、色彩与品牌视觉素材"
+        },
+        {
+          "name": "HyperOS 机模资源",
+          "en": "Device Mockups",
+          "summary": "各设备形态的界面机模"
         }
       ]
     },
@@ -756,6 +766,68 @@
           "name": "字体图标平台",
           "en": "Icon Platform",
           "summary": "管理和分发字体图标"
+        },
+        {
+          "name": "HyperOS 组件工坊",
+          "en": "Component Workshop",
+          "summary": "提供组件的预览、组装以及应用实例 Demo",
+          "status": "缺失"
+        }
+      ]
+    },
+    {
+      "id": "device-forms",
+      "index": 10,
+      "name": "设计组件",
+      "en": "Device Components",
+      "summary": "按设备形态覆盖的组件",
+      "groups": [
+        {
+          "name": "手机",
+          "en": "Phone",
+          "summary": "手机形态上的组件",
+          "status": "已完成"
+        },
+        {
+          "name": "折叠",
+          "en": "Foldable",
+          "summary": "折叠屏形态上的组件",
+          "status": "已完成"
+        },
+        {
+          "name": "平板",
+          "en": "Tablet",
+          "summary": "平板形态上的组件",
+          "status": "已完成"
+        },
+        {
+          "name": "电脑",
+          "en": "PC",
+          "summary": "电脑形态上的组件",
+          "status": "缺失"
+        },
+        {
+          "name": "电视",
+          "en": "TV",
+          "summary": "电视形态上的组件",
+          "status": "缺失"
+        },
+        {
+          "name": "穿戴",
+          "en": "Wearable",
+          "summary": "穿戴设备上的组件",
+          "status": "缺失"
+        },
+        {
+          "name": "IoT",
+          "summary": "IoT 设备上的组件",
+          "status": "缺失"
+        },
+        {
+          "name": "座舱",
+          "en": "Cockpit",
+          "summary": "座舱形态上的组件",
+          "status": "缺失"
         }
       ]
     }

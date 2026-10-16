@@ -2,16 +2,27 @@
 
 import { useEffect, useMemo, useState } from "react";
 import {
+  Blocks,
+  Car,
   Compass,
+  Cpu,
+  FoldVertical,
+  Frame,
   LayoutGrid,
   ListChecks,
+  Monitor,
   MonitorSmartphone,
   MousePointer2,
   Palette,
   Puzzle,
   Shapes,
   SlidersHorizontal,
+  Smartphone,
+  SwatchBook,
+  Tablet,
   TabletSmartphone,
+  Tv,
+  Watch,
   Type,
   Workflow,
   type LucideIcon,
@@ -31,13 +42,24 @@ const ROW_ICONS: Record<string, LucideIcon> = {
   "Figma 设计变量": Palette,
   "字体 MiSans 库": Type,
   "字体图标 Symbol 库": Shapes,
+  "HyperOS 品牌资源": SwatchBook,
+  "HyperOS 机模资源": Frame,
   "Figma 插件": Puzzle,
   "Design Token 管理平台": SlidersHorizontal,
   "规范检查插件": ListChecks,
   "字体图标平台": Type,
+  "HyperOS 组件工坊": Blocks,
+  手机: Smartphone,
+  折叠: FoldVertical,
+  平板: Tablet,
+  电脑: Monitor,
+  电视: Tv,
+  穿戴: Watch,
+  IoT: Cpu,
+  座舱: Car,
 };
 
-const LEAF_ROWS = new Set(["kits", "plugins"]);
+const LEAF_ROWS = new Set(["kits", "plugins", "device-forms"]);
 
 const ICONS: Record<string, LucideIcon> = {
   components: LayoutGrid,
@@ -55,21 +77,38 @@ const FILTERS: { id: Status | "all"; label: string }[] = [
   { id: "进行中", label: "进行中" },
 ];
 
-const PILLARS: { name: string; summary: string; categoryIds: string[] }[] = [
+const PILLARS: {
+  name: string;
+  summary: string;
+  categoryIds: string[];
+  wide?: boolean;
+  figure?: "guide";
+  unit?: string;
+}[] = [
   {
-    name: "设计标准与指南",
+    name: "设计指南",
     summary: "判断怎么做的原则与规范",
     categoryIds: ["principles", "experience", "patterns", "input", "components", "devices"],
+    wide: true,
+    figure: "guide",
+  },
+  {
+    name: "设计组件",
+    summary: "按设备形态覆盖的组件",
+    categoryIds: ["device-forms"],
+    unit: "类终端",
   },
   {
     name: "设计资源",
     summary: "可直接取用的设计文件",
-    categoryIds: ["kits"],
+    categoryIds: ["kits", "platform"],
+    unit: "项资源",
   },
   {
-    name: "工具与插件",
+    name: "设计工具",
     summary: "设计工具与系统能力",
-    categoryIds: ["plugins", "platform"],
+    categoryIds: ["plugins"],
+    unit: "款工具",
   },
 ];
 
@@ -164,20 +203,8 @@ export function Panorama() {
 
       <section className="bg-[var(--summary-surface)]">
         <div className="py-10 pr-[max(1.5rem,env(safe-area-inset-right))] pl-[max(1.5rem,env(safe-area-inset-left))] md:px-10 md:py-12">
-          <p className="text-xs font-medium tracking-[0.14em] text-[#ef3124]">条目合计</p>
-          <div className="mt-4 flex flex-wrap items-end gap-x-4 gap-y-2">
-            <p className="text-6xl font-semibold leading-none tracking-tight tabular-nums">{totals.total}</p>
-            <p className="mb-1.5 flex flex-wrap items-baseline gap-x-2 text-xl font-semibold leading-none tracking-tight tabular-nums">
-              <span className="font-medium text-[#c5cad1]">=</span>
-              <span className="text-[#178a45]">{totals.done}</span>
-              <span className="text-sm font-medium text-[#178a45]">已完成</span>
-              <span className="font-medium text-[#c5cad1]">+</span>
-              <span className="text-[#9a6230]">{totals.wip}</span>
-              <span className="text-sm font-medium text-[#9a6230]">进行中</span>
-            </p>
-          </div>
-          <p className="mt-4 text-sm leading-6 text-[#8b939c]">
-            把「设计标准与指南、设计资源、工具与插件」统一收口为 HyperOS 设计开发平台，服务产设研测从选标准到合格交付
+          <p className="text-sm leading-6 text-[#8b939c]">
+            把「设计指南、设计组件、设计资源、设计工具」统一收口为 HyperOS 设计开发平台，服务产设研测从选标准到合格交付
           </p>
           <Overview sections={sections} current={current} onOpen={openSection} />
         </div>
@@ -230,11 +257,44 @@ export function Panorama() {
           ) : null}
 
           <p className="max-w-2xl py-8 text-xs leading-6 text-[#8b939c]">
-            页面文字来自《HyperOS 设计与开发平台全景图》里的一张总表。飞书子页、组件规格、示意图、链接、负责人和时间不在这份数据里。「㝵航」「Empty Stat」按原文显示。原文里的「已有」显示为「已完成」。子分类标了「进行中」、条目本身没写状态的，显示为「进行中」。
+            页面文字来自《HyperOS 设计与开发平台全景图》里的一张总表。飞书子页、组件规格、示意图、链接、负责人和时间不在这份数据里。「㝵航」「Empty Stat」按原文显示。原文里的「已有」显示为「已完成」。子分类标了「进行中」、条目本身没写状态的，显示为「进行中」。「交互与输入」「多设备设计与场景实践」「HyperOS 组件工坊」，以及设计组件里的「电脑」「电视」「穿戴」「IoT」「座舱」显示为「缺失」。
           </p>
       </main>
     </div>
   );
+}
+
+function PillarStat({
+  figure,
+  unit,
+  classes,
+  total,
+}: {
+  figure?: "guide";
+  unit?: string;
+  classes: number;
+  total: number;
+}) {
+  if (figure === "guide") {
+    return (
+      <p className="flex shrink-0 items-baseline leading-none tabular-nums">
+        <span className="text-[32px] font-semibold tracking-tight">{classes}</span>
+        <span className="ml-1 text-sm font-medium text-[#5c6570]">大分类</span>
+        <span className="mx-2 text-sm font-medium text-[#c5cad1]">/</span>
+        <span className="text-[32px] font-semibold tracking-tight">{total}</span>
+        <span className="ml-1 text-sm font-medium text-[#5c6570]">项</span>
+      </p>
+    );
+  }
+  if (unit) {
+    return (
+      <p className="flex shrink-0 items-baseline leading-none tabular-nums">
+        <span className="text-[32px] font-semibold tracking-tight">{classes}</span>
+        <span className="ml-1.5 text-sm font-medium text-[#5c6570]">{unit}</span>
+      </p>
+    );
+  }
+  return <p className="shrink-0 text-[32px] font-semibold leading-none tracking-tight tabular-nums">{total}</p>;
 }
 
 function Overview({
@@ -256,17 +316,25 @@ function Overview({
           return section ? [section] : [];
         });
         const total = items.reduce((sum, item) => sum + countRows(item.cards).total, 0);
+        const classes = items.reduce(
+          (sum, item) => sum + (LEAF_ROWS.has(item.category.id) ? item.cards.length : 1),
+          0,
+        );
         return (
-          <section key={pillar.name} className="flex h-full flex-col rounded-2xl bg-white p-5 shadow-raised" aria-label={pillar.name}>
+          <section
+            key={pillar.name}
+            className={`flex h-full flex-col rounded-2xl bg-white p-5 shadow-raised ${pillar.wide ? "lg:col-span-3" : ""}`}
+            aria-label={pillar.name}
+          >
             <div className="flex items-start justify-between gap-4 px-2">
               <div className="min-w-0">
                 <h2 className="text-base font-semibold tracking-tight">{pillar.name}</h2>
                 <p className="mt-1 text-xs leading-5 text-[#8b939c]">{pillar.summary}</p>
               </div>
-              <p className="shrink-0 text-[32px] font-semibold leading-none tracking-tight tabular-nums">{total}</p>
+              <PillarStat figure={pillar.figure} unit={pillar.unit} classes={classes} total={total} />
             </div>
             {items.length ? (
-              <div className="mt-5 flex flex-1 flex-col gap-1">
+              <div className={pillar.wide ? "mt-5 grid gap-1 lg:grid-cols-3 lg:gap-x-4" : "mt-5 flex flex-1 flex-col gap-1"}>
                 {items.flatMap(({ category, cards }) => {
                   const entries = LEAF_ROWS.has(category.id)
                     ? cards.map((card) => ({
@@ -315,8 +383,21 @@ function Overview({
                           ) : null}
                         </span>
                         <span className="pt-0.5 text-end text-xs leading-5 whitespace-nowrap tabular-nums">
-                          <span className="block text-[#178a45]">已完成 {entry.counts.done}</span>
-                          <span className="block text-[#9a6230]">进行中 {entry.counts.wip}</span>
+                          {entry.counts.done > 0 ? (
+                            <span className="block text-[#178a45]">
+                              {entry.counts.wip === 0 && entry.counts.missing === 0
+                                ? "已完成"
+                                : `已完成 ${entry.counts.done}`}
+                            </span>
+                          ) : null}
+                          {entry.counts.wip > 0 ? (
+                            <span className="block text-[#5c6570]">进行中 {entry.counts.wip}</span>
+                          ) : null}
+                          {entry.counts.missing > 0 ? (
+                            <span className="block text-[#ef3124]">
+                              {entry.counts.missing === 1 ? "缺失" : `缺失 ${entry.counts.missing}`}
+                            </span>
+                          ) : null}
                         </span>
                       </button>
                     );
@@ -371,10 +452,12 @@ function CardGrid({ cards }: { cards: CardModel[] }) {
 
 function MetricCard({ card }: { card: CardModel }) {
   const done = card.rows.filter((row) => row.status === "已完成").length;
-  const wip = card.rows.length - done;
+  const wip = card.rows.filter((row) => row.status === "进行中").length;
+  const missing = card.rows.filter((row) => row.status === "缺失").length;
   const total = card.rows.length;
   const single = total === 1 && card.rows[0].name === card.name;
-  const tone = done === total ? "#178a45" : wip === total ? "#9a6230" : "#1b1e23";
+  const tone = done === total ? "#178a45" : missing === total ? "#ef3124" : wip === total ? "#5c6570" : "#1b1e23";
+  const label = done === total ? "已完成" : missing === total ? "缺失" : wip === total ? "进行中" : "条目";
 
   return (
     <article className="flex h-full flex-col rounded-2xl bg-white p-5 shadow-raised">
@@ -396,12 +479,18 @@ function MetricCard({ card }: { card: CardModel }) {
           <p className="text-[32px] font-semibold leading-none tracking-tight tabular-nums" style={{ color: tone }}>
             {total}
           </p>
-          <p className="mt-2 text-xs text-[#8b939c]">{done === total ? "已完成" : wip === total ? "进行中" : "条目"}</p>
+          <p className="mt-2 text-xs text-[#8b939c]">{label}</p>
         </div>
         <p className="pb-1 text-xs tabular-nums text-[#8b939c]">
           <span className="text-[#178a45]">已完成 {done}</span>
           <span className="mx-1.5 text-[#d5d8de]">·</span>
-          <span className="text-[#9a6230]">进行中 {wip}</span>
+          <span className="text-[#5c6570]">进行中 {wip}</span>
+          {missing > 0 ? (
+            <>
+              <span className="mx-1.5 text-[#d5d8de]">·</span>
+              <span className="text-[#ef3124]">{missing === 1 ? "缺失" : `缺失 ${missing}`}</span>
+            </>
+          ) : null}
         </p>
       </div>
 
@@ -410,7 +499,8 @@ function MetricCard({ card }: { card: CardModel }) {
         aria-hidden="true"
       >
         <span className="h-full bg-[#2fbe6a]" style={{ width: `${(done / total) * 100}%` }} />
-        <span className="h-full bg-[#f0b429]" style={{ width: `${(wip / total) * 100}%` }} />
+        <span className="h-full bg-[#8b939c]" style={{ width: `${(wip / total) * 100}%` }} />
+        <span className="h-full bg-[#ef3124]" style={{ width: `${(missing / total) * 100}%` }} />
       </div>
 
       {single ? (
@@ -461,13 +551,14 @@ function DetailBits({
 }
 
 function StatusPill({ status }: { status: Status }) {
-  const done = status === "已完成";
+  const tone =
+    status === "已完成"
+      ? "bg-[#e7f6ee] text-[#178a45]"
+      : status === "缺失"
+        ? "bg-[#fdecea] text-[#ef3124]"
+        : "bg-[#eef0f3] text-[#5c6570]";
   return (
-    <span
-      className={`inline-flex h-[22px] items-center rounded-full px-2 text-xs font-medium ${
-        done ? "bg-[#e7f6ee] text-[#178a45]" : "bg-[#f8f1e4] text-[#9a6230]"
-      }`}
-    >
+    <span className={`inline-flex h-[22px] items-center rounded-full px-2 text-xs font-medium ${tone}`}>
       {status}
     </span>
   );

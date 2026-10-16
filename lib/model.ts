@@ -1,6 +1,6 @@
 import raw from "@/data/panorama.json";
 
-export type Status = "已完成" | "进行中";
+export type Status = "已完成" | "进行中" | "缺失";
 
 export type Item = {
   name: string;
@@ -64,7 +64,8 @@ export function orderedCategories(categories: Category[]) {
 }
 
 function labelOf(status: string | undefined, inherited?: string): Status {
-  if (status === "进行中" || (!status && inherited === "进行中")) return "进行中";
+  if (status === "缺失" || status === "进行中") return status;
+  if (!status && (inherited === "缺失" || inherited === "进行中")) return inherited;
   return "已完成";
 }
 
@@ -122,5 +123,6 @@ export function countRows(cards: CardModel[]) {
     total: rows.length,
     done: rows.filter((row) => row.status === "已完成").length,
     wip: rows.filter((row) => row.status === "进行中").length,
+    missing: rows.filter((row) => row.status === "缺失").length,
   };
 }
