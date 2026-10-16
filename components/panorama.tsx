@@ -36,6 +36,9 @@ const FILTERS: { id: Status | "all"; label: string }[] = [
   { id: "进行中", label: "进行中" },
 ];
 
+const pressable =
+  "font-medium transition-[color,background-color,transform] duration-150 ease-out active:scale-[0.96] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b1e23]";
+
 export function Panorama() {
   const categories = useMemo(() => orderedCategories(data.categories), []);
   const [filter, setFilter] = useState<Status | "all">("all");
@@ -69,20 +72,30 @@ export function Panorama() {
 
   function openSection(id: string) {
     setCurrent(id);
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.getElementById(id)?.scrollIntoView({
+      behavior: reduce ? "auto" : "smooth",
+      block: "start",
+    });
   }
 
   return (
     <div className="min-h-screen bg-white">
-      <header className="sticky top-0 z-20 flex h-16 items-center gap-6 border-b border-[#eceef2] bg-white px-6">
-        <div className="flex w-[248px] shrink-0 items-center gap-3">
-          <span className="grid size-8 place-items-center rounded-lg bg-[#ef3124] text-sm font-semibold text-white">
-            H
-          </span>
-          <span className="text-[15px] font-semibold tracking-tight">HyperOS</span>
+      <header className="sticky top-0 z-header flex flex-wrap items-center gap-x-6 gap-y-3 border-b border-[#eceef2] bg-white py-3 pr-[max(1.5rem,env(safe-area-inset-right))] pl-[max(1.5rem,env(safe-area-inset-left))] md:h-16 md:flex-nowrap md:py-0">
+        <div className="flex min-w-0 items-center gap-3">
+          <img
+            src="/xiaomi-hyperos-logo.png"
+            alt="Xiaomi HyperOS"
+            width={1020}
+            height={139}
+            draggable={false}
+            className="h-6 w-auto shrink-0 select-none"
+          />
+          <p className="hidden min-w-0 truncate text-[15px] font-medium tracking-tight text-[#1b1e23] md:block">
+            {data.title}
+          </p>
         </div>
-        <p className="min-w-0 truncate text-sm text-[#5c6570]">{data.title}</p>
-        <div className="ml-auto flex rounded-xl border border-[#e7e9ee] bg-white p-1">
+        <div className="flex w-full rounded-xl border border-[#e7e9ee] bg-white p-1 md:ml-auto md:w-auto">
           {FILTERS.map((item) => {
             const on = filter === item.id;
             const count =
@@ -93,12 +106,14 @@ export function Panorama() {
                 type="button"
                 aria-pressed={on}
                 onClick={() => setFilter(item.id)}
-                className={`h-8 rounded-lg px-3 text-[13px] ${
-                  on ? "bg-[#f3f4f6] font-medium text-[#1b1e23]" : "text-[#5c6570]"
+                className={`h-11 flex-1 rounded-lg px-3 text-[13px] md:flex-none ${pressable} ${
+                  on ? "bg-[#f3f4f6] text-[#1b1e23]" : "text-[#5c6570] hover:bg-[#f7f8fa]"
                 }`}
               >
                 {item.label}
-                <span className="ml-1.5 tabular-nums text-[#8b939c]">{count}</span>
+                <span className="ml-1.5 inline-block min-w-[2ch] text-right tabular-nums text-[#8b939c]">
+                  {count}
+                </span>
               </button>
             );
           })}
@@ -118,8 +133,8 @@ export function Panorama() {
                   key={category.id}
                   type="button"
                   onClick={() => openSection(category.id)}
-                  className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-left text-[13px] ${
-                    on ? "bg-[#f3f4f6] font-medium text-[#1b1e23]" : "text-[#3c4450]"
+                  className={`flex min-h-11 w-full items-center gap-3 rounded-xl px-3 text-left text-[13px] ${pressable} ${
+                    on ? "bg-[#f3f4f6] text-[#1b1e23]" : "text-[#3c4450] hover:bg-[#f7f8fa]"
                   }`}
                 >
                   <Icon className="size-4 shrink-0 text-[#6d7682]" strokeWidth={1.75} />
@@ -131,11 +146,11 @@ export function Panorama() {
           </nav>
         </aside>
 
-        <main className="min-w-0 flex-1 px-6 py-8 md:px-10">
+        <main className="min-w-0 flex-1 py-8 pr-[max(1.5rem,env(safe-area-inset-right))] pl-[max(1.5rem,env(safe-area-inset-left))] md:pr-10 md:pl-10">
           <section className="border-b border-[#eceef2] pb-8">
             <p className="text-xs font-medium tracking-[0.14em] text-[#ef3124]">条目合计</p>
-            <p className="mt-3 text-5xl font-semibold tracking-tight tabular-nums">{totals.total}</p>
-            <p className="mt-2 text-sm leading-7 text-[#8b939c]">
+            <p className="mt-3 text-6xl font-semibold tracking-tight tabular-nums">{totals.total}</p>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#8b939c]">
               把「设计标准与指南、设计资源、工程组件、工具与插件」统一收口为 HyperOS 设计开发平台，服务产设研测从选标准到合格交付
             </p>
             <div className="mt-8 flex flex-wrap items-end gap-x-6 gap-y-4">
@@ -157,8 +172,10 @@ export function Panorama() {
                 key={category.id}
                 type="button"
                 onClick={() => openSection(category.id)}
-                className={`shrink-0 rounded-full px-3 py-1.5 text-[13px] ${
-                  current === category.id ? "bg-[#f3f4f6] font-medium" : "text-[#5c6570]"
+                className={`min-h-11 shrink-0 rounded-full px-4 text-[13px] ${pressable} ${
+                  current === category.id
+                    ? "bg-[#f3f4f6] text-[#1b1e23]"
+                    : "text-[#5c6570] hover:bg-[#f7f8fa]"
                 }`}
               >
                 {category.name}
@@ -173,11 +190,11 @@ export function Panorama() {
                 key={category.id}
                 id={category.id}
                 data-section
-                className="scroll-mt-24 border-b border-[#f0f1f4] py-10"
+                className="scroll-mt-32 border-b border-[#f0f1f4] py-10 md:scroll-mt-20"
               >
                 <div className="flex items-end justify-between gap-4">
                   <div>
-                    <h2 className="text-xl font-semibold tracking-tight">{category.name}</h2>
+                    <h2 className="text-balance text-xl font-semibold tracking-tight">{category.name}</h2>
                     <p className="mt-1 text-sm text-[#8b939c]">{category.summary}</p>
                   </div>
                   <p className="shrink-0 tabular-nums leading-none">
@@ -189,6 +206,22 @@ export function Panorama() {
               </section>
             );
           })}
+
+          {sections.length === 0 ? (
+            <div className="max-w-md py-16">
+              <h2 className="text-balance text-xl font-semibold tracking-tight">这个状态下还没有条目</h2>
+              <p className="mt-2 text-sm leading-relaxed text-[#8b939c]">
+                当前筛选没有匹配的分类。可以改看全部条目。
+              </p>
+              <button
+                type="button"
+                onClick={() => setFilter("all")}
+                className={`mt-6 h-11 rounded-lg bg-[#f3f4f6] px-4 text-[13px] text-[#1b1e23] ${pressable}`}
+              >
+                查看全部
+              </button>
+            </div>
+          ) : null}
 
           <p className="max-w-2xl py-8 text-xs leading-6 text-[#8b939c]">
             页面文字来自《HyperOS 设计与开发平台全景图》里的一张总表。飞书子页、组件规格、示意图、链接、负责人和时间不在这份数据里。「㝵航」「Empty Stat」按原文显示。原文里的「已有」显示为「已完成」。子分类标了「进行中」、条目本身没写状态的，显示为「进行中」。
@@ -224,7 +257,7 @@ function Operator({ sign }: { sign: string }) {
 function Legend({ color, text }: { color: string; text: string }) {
   return (
     <span className="inline-flex items-center gap-2">
-      <span className="size-2 rounded-full" style={{ background: color }} />
+      <span className="pointer-events-none size-2 rounded-full" aria-hidden="true" style={{ background: color }} />
       {text}
     </span>
   );
@@ -277,7 +310,7 @@ function MetricCard({ card }: { card: CardModel }) {
     <article className="flex h-full flex-col rounded-2xl border border-[#e6e8ec] bg-white p-5">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <h3 className="text-[15px] font-semibold leading-snug">{card.name}</h3>
+          <h3 className="text-balance text-[15px] font-semibold leading-snug">{card.name}</h3>
           {card.summary ? <p className="mt-1 text-xs leading-5 text-[#8b939c]">{card.summary}</p> : null}
         </div>
         <p className="shrink-0 text-xs tabular-nums text-[#8b939c]">{total} 条</p>
@@ -290,14 +323,17 @@ function MetricCard({ card }: { card: CardModel }) {
           </p>
           <p className="mt-2 text-xs text-[#8b939c]">{done === total ? "已完成" : wip === total ? "进行中" : "条目"}</p>
         </div>
-        <p className="pb-1 text-xs text-[#8b939c]">
+        <p className="pb-1 text-xs tabular-nums text-[#8b939c]">
           <span className="text-[#178a45]">已完成 {done}</span>
           <span className="mx-1.5 text-[#d5d8de]">·</span>
           <span className="text-[#9a6230]">进行中 {wip}</span>
         </p>
       </div>
 
-      <div className="mt-3 flex h-1.5 overflow-hidden rounded-full bg-[#eceff3]">
+      <div
+        className="pointer-events-none mt-3 flex h-1.5 overflow-hidden rounded-full bg-[#eceff3]"
+        aria-hidden="true"
+      >
         <span className="h-full bg-[#2fbe6a]" style={{ width: `${(done / total) * 100}%` }} />
         <span className="h-full bg-[#f0b429]" style={{ width: `${(wip / total) * 100}%` }} />
       </div>

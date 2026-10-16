@@ -9,7 +9,7 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "HyperOS 设计与开发平台全景图",
+  title: "设计与开发平台数据看板",
   description: "HyperOS 设计与开发平台分类全景",
 };
 

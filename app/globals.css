@@ -20,6 +20,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
+  --z-index-header: 20;
 }
 
 body {
@@ -29,5 +30,6 @@ body {
 }
 
 ::selection {
-  background: #fde8e6;
+  background: #e6e8ec;
+  color: #1b1e23;
 }
